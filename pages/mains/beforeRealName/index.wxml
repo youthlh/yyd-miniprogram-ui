@@ -1,0 +1,25 @@
+<view class="beforeRealName">
+  <view class="beforeRealName-content">
+    <!-- 内容切换 -->
+    <view class="beforeRealName-scroll">
+      <view class="scroll-con">
+        <!-- 1.视频学习 -->
+        <view class="{{stepIndex===1?'show-view':'hidden-view'}}">
+          <video-learning bind:stepChange="stepChange" />
+        </view>
+        <!-- 2.合规考试 -->
+        <view class="{{stepIndex===2?'show-view':'hidden-view'}}">
+          <norm-exam personalUserId="{{id}}" bind:stepChange="stepChange" certificatePath="{{certificatePath}}"  bind:serverUrlChange="serverUrlChange" />
+        </view>
+        <!-- 3.合规考试通过-下载证书 -->
+        <!-- <view class="{{stepIndex===3?'show-view':'hidden-view'}}"> -->
+        <down-norm wx:if="{{stepIndex===3}}" personalUserId="{{id}}" certificatePath="{{certificatePath}}" bind:downNorm="downNorm" bind:stepChange="stepChange" />
+        <!-- </view> -->
+        <!-- 4.仅仅下载证书 -->
+        <!-- <view class="{{stepIndex===4?'show-view':'hidden-view'}}"> -->
+        <only-down wx:if="{{stepIndex===4}}" personalUserId="{{id}}" certificatePath="{{certificatePath}}" bind:downNorm="downNorm" />
+        <!-- </view> -->
+      </view>
+    </view>
+  </view>
+</view>

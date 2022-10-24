@@ -1,0 +1,117 @@
+<!-- 问卷详情  detailsQuestionnaire -->
+<view class="_detailsQuestionnaire">
+  <view class="_header">
+    <view class="_p1">{{ questionnaireTemplate.questionnaireName }}</view>
+    <view class="_p2">{{questionnaireTemplate.questionnaireDesc}}</view>
+  </view>
+  <view wx:if="{{questionnaireTemplate.questionnaireQuestions && questionnaireTemplate.questionnaireQuestions.length}}">
+    <view
+      class="_subject"
+      wx:for="{{questionnaireTemplate.questionnaireQuestions}}"
+      wx:for-index="index"
+      wx:key="index"
+      data-index="{{index}}"
+    >
+      <!-- 单选题 -->
+      <view class="_singleSelection" wx:if="{{item.questionType === 1}}">
+        <view class="_title {{item.mustAnswer === 1 ? '_must' : ''}}">
+          {{ index + 1 }}.{{ item.questionTitle }}[单选题]
+        </view>
+        <radio-group class="_options">
+          <view
+            class="_group"
+            wx:for="{{item.questionnaireQuestionOptions}}"
+            wx:for-item="item1"
+            wx:key="index1"
+            data-index="{{index1}}"
+          >
+            <label class="radio_label">
+              <radio disabled value="{{item1.optionSn}}" />
+              <view class="_text">{{item1.optionContent?item1.optionContent:'--'}}</view>
+            </label>
+            <input
+              wx:if="{{item1.allowFill}}"
+              disabled
+              model:value="{{item1.resultContent}}"
+              bindinput="_bindinput"
+              class="weui-input"
+            />
+          </view>
+        </radio-group>
+      </view>
+      <!-- 多选题 -->
+      <view class="_multipleChoice" wx:elif="{{item.questionType === 2}}">
+        <view class="_title {{item.mustAnswer === 1 ? '_must' : ''}}">
+          {{ index + 1 }}.{{ item.questionTitle }}[多选题]
+        </view>
+        <checkbox-group class="_options">
+          <view
+            class="_group"
+            wx:for="{{item.questionnaireQuestionOptions}}"
+            wx:for-item="item1"
+            wx:key="index2"
+            data-index="{{index2}}"
+          >
+            <label class="checkbox_label">
+              <checkbox value="{{item1.optionSn}}" disabled />
+              <view class="_text">{{item1.optionContent?item1.optionContent:'--'}}</view>
+            </label>
+            <input
+              wx:if="{{item1.allowFill}}"
+              disabled
+              model:value="{{item1.resultContent}}"
+              bindinput="_bindinput"
+              class="weui-input"
+            />
+          </view>
+        </checkbox-group>
+      </view>
+      <!-- 填空题 -->
+      <view class="_gapFilling" wx:elif="{{item.questionType === 3}}">
+        <view class="_title {{item.mustAnswer === 1 ? '_must' : ''}}">
+          {{ index + 1 }}.{{ item.questionTitle }}
+        </view>
+        <input
+          wx:if="{{item.blankType === 0}}"
+          disabled
+          model:value="{{item.optionContent}}"
+        />
+        <picker
+          disabled
+          mode="date"
+          model:value="{{item.optionContent}}"
+          wx:if="{{item.blankType === 1}}"
+        >
+          <view class="picker">
+            选择日期:
+            <view class="_date1"></view>
+            {{item.optionContent?item.optionContent:''}}
+          </view>
+        </picker>
+        <input
+          wx:if="{{item.blankType === 2}}"
+          type="number"
+          disabled
+          model:value="{{item.optionContent}}"
+        />
+        <input
+          wx:if="{{item.blankType === 3}}"
+          type="digit"
+          disabled
+          model:value="{{item.optionContent}}"
+        />
+      </view>
+    </view>
+  </view>
+  <view wx:else class="noData">
+    <view class="_img">
+      <image
+        src="/assets/img/noData.png"
+        mode="widthFix"
+        lazy-load="true"
+      ></image>
+      <view class="_text">暂无数据</view>
+    </view>
+  </view>
+</view>
+

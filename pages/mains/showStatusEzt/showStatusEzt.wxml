@@ -1,0 +1,23 @@
+<!-- 状态显示 -->
+<view class="showStatusEzt">
+  <view class="info">
+    <image
+      wx:if="{{resultStatus}}"
+      src="./../../../assets/img/mainImgs/right.png"
+      mode="widthFix"
+      lazy-load="false"
+    ></image>
+    <image
+      wx:else
+      src="./../../../assets/img/mainImgs/wrong.png"
+      mode="widthFix"
+      lazy-load="false"
+    ></image>
+    <p wx:if="{{resultStatus}}">恭喜，实名认证已通过</p>
+    <p wx:else>实名认证未通过</p>
+  </view>
+  <view class="btn">
+    <button bindtap="back" class="back">返回</button>
+  </view>
+</view>
+

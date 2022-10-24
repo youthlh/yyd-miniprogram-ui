@@ -1,0 +1,6 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "usingComponents": {
+    "upload-img": "/components/picShow/picShow"
+  }
+}

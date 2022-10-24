@@ -1,0 +1,233 @@
+._questionnaire {
+  padding: 50rpx 40rpx 20rpx;
+  background: #ffffff;
+
+  ._header {
+    background: #ffffff;
+    margin-bottom: 64rpx;
+
+    ._p1 {
+      text-align: center;
+      font-family: PingFangSC-Medium;
+      font-size: 44rpx;
+      color: #669cf6;
+      line-height: 60rpx;
+      height: 60rpx;
+      margin-bottom: 64rpx;
+    }
+  }
+  .des-for-start {
+    margin-bottom: 40rpx;
+  }
+
+  ._subject {
+    // 单选
+    ._singleSelection {
+      margin-bottom: 80rpx;
+
+      ._title {
+        font-family: PingFangSC-Medium;
+        font-size: 32rpx;
+        color: #111500;
+        line-height: 44rpx;
+        display: flex;
+        margin-bottom: 24rpx;
+      }
+
+      ._must {
+        &::before {
+          content: "*  ";
+          color: red !important;
+          width: 20rpx;
+          font-size: 32rpx;
+          height: 44rpx;
+          line-height: 48rpx;
+          display: inline-block;
+          text-align: left;
+          overflow: hidden;
+        }
+      }
+
+      ._options {
+        width: 100%;
+        background: #ffffff;
+        border: 2rpx solid #eeeeee;
+        border-radius: 12rpx;
+
+        .radio_label {
+          display: flex;
+          border-bottom: 2rpx solid #eeeeee;
+          padding: 10rpx 0 10rpx 24rpx;
+          align-items: flex-start;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          radio {
+            margin: auto 0;
+          }
+
+          ._text {
+            min-height: 96rpx;
+            line-height: 50rpx;
+            font-family: PingFangSC-Regular;
+            font-size: 30rpx;
+            color: #233347;
+            display: flex;
+            align-items: center;
+          }
+
+          input {
+            height: 64rpx;
+            margin: auto 10rpx auto 24rpx;
+            padding: 0 10rpx;
+            border: 2rpx solid #eeeeee;
+          }
+        }
+      }
+    }
+
+    // 多选
+    ._multipleChoice {
+      margin-bottom: 80rpx;
+
+      ._title {
+        font-family: PingFangSC-Medium;
+        font-size: 32rpx;
+        color: #111500;
+        line-height: 44rpx;
+        display: flex;
+        margin-bottom: 24rpx;
+      }
+
+      ._must {
+        &::before {
+          content: "*  ";
+          color: red !important;
+          width: 20rpx;
+          font-size: 32rpx;
+          height: 44rpx;
+          line-height: 48rpx;
+          display: inline-block;
+          text-align: left;
+          overflow: hidden;
+        }
+      }
+
+      ._options {
+        width: 100%;
+        background: #ffffff;
+        border: 2rpx solid #eeeeee;
+        border-radius: 12rpx;
+
+        .checkbox_label {
+          display: flex;
+          border-bottom: 2rpx solid #eeeeee;
+          padding: 0 0 0 24rpx;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          checkbox {
+            margin: auto 0;
+          }
+
+          ._text {
+            height: 96rpx;
+            line-height: 96rpx;
+            font-family: PingFangSC-Regular;
+            font-size: 30rpx;
+            color: #233347;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          input {
+            height: 64rpx;
+            margin: auto 10rpx auto 24rpx;
+            padding: 0 10rpx;
+            border: 2rpx solid #eeeeee;
+          }
+        }
+      }
+    }
+
+    // 填空
+    ._gapFilling {
+      margin-bottom: 80rpx;
+
+      ._title {
+        font-family: PingFangSC-Medium;
+        font-size: 32rpx;
+        color: #111500;
+        line-height: 44rpx;
+        display: flex;
+        margin-bottom: 24rpx;
+      }
+
+      ._must {
+        &::before {
+          content: "*  ";
+          color: red !important;
+          width: 20rpx;
+          font-size: 32rpx;
+          height: 44rpx;
+          line-height: 48rpx;
+          display: inline-block;
+          text-align: left;
+          overflow: hidden;
+        }
+      }
+
+      input {
+        padding: 0 20rpx;
+        background: #ffffff;
+        border: 2rpx solid #eeeeee;
+        border-radius: 6px;
+        height: 76rpx;
+        line-height: 76rpx;
+      }
+
+      .picker {
+        height: 76rpx;
+        line-height: 76rpx;
+        display: flex;
+
+        ._date1 {
+          flex: 1;
+          margin-left: 24rpx;
+          border: 2rpx solid #eeeeee;
+          border-radius: 6px;
+          height: 76rpx;
+          line-height: 76rpx;
+        }
+      }
+    }
+
+    .sub_wrap {
+      button {
+        width: 100%;
+        height: 90rpx;
+        line-height: 90rpx;
+        padding: 0;
+        box-shadow: 0 4rpx 8rpx 0 rgba(56, 116, 246, 0.1);
+        border-radius: 16rpx;
+        font-family: PingFangSC-Regular;
+        font-size: 28rpx;
+        background: #669cf6;
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 40rpx;
+      }
+
+      ._but {
+        background: #f2f2f2;
+        color: #666666;
+        margin: 0;
+      }
+    }
+  }
+}

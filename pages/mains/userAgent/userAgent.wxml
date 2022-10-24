@@ -1,0 +1,39 @@
+<!-- 用户协议 -->
+<view class="_userAgent">
+  <view class="contents">
+    <view
+      wx:for="{{argumentsArr}}"
+      wx:for-index="index"
+      wx:key="index"
+      data-index="{{index}}"
+    >
+      <rich-text wx:if="{{index==argumentsArrIndex}}" nodes="{{item}}"></rich-text>
+    </view>
+  </view>
+  <view class="_signature" wx:if="{{signatureImg}}">
+    <image src="{{signatureImg}}" lazy-load="false"></image>
+    <view class="_handle" bindtap="signatureChange">
+      <em class="iconfont icon-brush_fill"></em>
+      重新签名
+    </view>
+  </view>
+  <view class="checkbox">
+    <checkbox-group bindchange="checkboxChange" class="_group">
+      <checkbox checked="{{checkboxShow}}" color="#3874F6" />
+    </checkbox-group>
+    我已阅读并同意以上协议内容
+  </view>
+  <view class="btn">
+    <button wx:if="{{!signatureShow}}" bindtap="signatureChange">签名</button>
+    <button
+      wx:else
+      bindtap="{{checkboxShow&&!authentication?'sure':''}}"
+      class="{{checkboxShow&&!authentication?'':'noShade'}}"
+      disabled="{{authentication}}"
+    >
+      继续认证
+    </button>
+    <button bindtap="notKnow" class="back">返回</button>
+  </view>
+</view>
+

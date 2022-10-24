@@ -1,0 +1,33 @@
+<!-- 签到详情        checkDetails -->
+<wxs src="/utils/common.wxs" module="common" />
+<view class="_checkDetails">
+  <view wx:if="{{taskActivitySignIns.length}}">
+    <view
+      class="_signIns"
+      wx:for="{{taskActivitySignIns}}"
+      wx:for-index="index"
+      wx:key="index"
+      data-index="{{index}}"
+    >
+      <view class="_icon iconfont  icon-brush_fill"></view>
+      <view class="_text">
+        <view class="_top">
+          <view class="_name">{{item.personalName?item.personalName:'--'}}</view>
+          <view class="_time">{{common.formatDate(item.createTime,"time")}}</view>
+        </view>
+        <view class="_bot">{{item.place?item.place:'--'}}</view>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="noData">
+    <view class="_img">
+      <image
+        src="/assets/img/noData.png"
+        mode="widthFix"
+        lazy-load="true"
+      ></image>
+      <view class="_text">暂无数据</view>
+    </view>
+  </view>
+</view>
+

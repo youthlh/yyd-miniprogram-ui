@@ -1,0 +1,12 @@
+<!-- components/picShow/picShow.wxml -->
+<view class="imgList">
+  <view class="_imageCont" wx:for="{{newArr}}" wx:key="index">
+    <view wx:if="{{!readOnly}}" class="_imageDelete icon  iconfont  icon-close" bindtap="deleteImage" data-idx1="{{index}}"></view>
+    <image bindtap="previewImg" data-idx="{{index}}" src="{{item.url}}" lazy-load="true" class="_image"></image>
+  </view>
+  <view class="_img" bindtap="uploadImg" wx:if="{{newArr.length <  numSum &&!readOnly}}">
+    <view class="_tu icon iconfont  icon-xiangji"></view>
+    <view class="_tex">照片</view>
+  </view>
+  <canvas canvas-id="canvas" style="width:{{cWidth}}px;height:{{cHeight}}px;position: absolute;left:-1000px;top:-1000px;z-index:-99999;opacity:0"></canvas>
+</view>

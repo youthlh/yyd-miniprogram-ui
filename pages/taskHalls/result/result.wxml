@@ -1,0 +1,20 @@
+<!-- 申请结果  result -->
+<view class="_result">
+  <view class="_resultsIcon">
+    <image
+      wx:if="{{status.type}}"
+      src="/assets/img/taskHallImgs/right.png"
+      lazy-load="true"
+      mode="heightFix"
+    ></image>
+    <image
+      wx:else
+      src="/assets/img/taskHallImgs/wrong.png"
+      lazy-load="true"
+    ></image>
+  </view>
+  <view class="_resultsText">{{status.typeText}}</view>
+  <view class="_resultsText1">{{status.introduce}}</view>
+  <button class="_back" bindtap="back">返回</button>
+</view>
+

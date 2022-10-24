@@ -1,0 +1,57 @@
+._alreadyTest {
+    padding: 30rpx 40rpx 20rpx;
+    background: #FFFFFF;
+
+    ._questionnaireAlreadyTest {
+        background: #FFFFFF;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.10);
+        border-radius: 16rpx;
+        padding: 40rpx;
+        height: 186rpx;
+        display: flex;
+        margin-bottom: 30rpx;
+
+        ._lef {
+            width: calc(100% - 120rpx);
+
+            ._top1 {
+                width: 100%;
+                font-family: PingFangSC-Regular;
+                font-size: 32rpx;
+                color: #233347;
+                text-align: justify;
+                line-height: 48rpx;
+                height: 48rpx;
+                margin-bottom: 14rpx;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            ._top2 {
+                opacity: 0.5;
+                font-family: PingFangSC-Regular;
+                font-size: 28rpx;
+                color: #233347;
+
+                text-align: justify;
+                line-height: 48rpx;
+
+            }
+        }
+
+        ._rig {
+            height: 100%;
+            width: 116rpx;
+            text-align: right;
+            border-left: 2rpx solid rgba(179, 205, 252, .5);
+            font-family: PingFangSC-Regular;
+            font-size: 36rpx;
+            line-height: 106rpx;
+            color: #669CF6;
+
+            ;
+        }
+    }
+
+}

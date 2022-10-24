@@ -1,0 +1,30 @@
+<!-- 结算信息 billingInfo -->
+<wxs src="/utils/common.wxs" module="common" />
+<view class="_billingInfo" style="background-color:{{!functionalDevice.length?'#ffffff':'#F6F8F9'}}">
+  <view wx:if="{{functionalDevice.length}}">
+    <view wx:for="{{functionalDevice}}" wx:for-index="index" wx:key="index" data-index="{{index}}">
+      <view class="_time">{{common.formatDate(item.settlementFinishTime,"date")}}</view>
+      <view class="_billingInfoData">
+        <view class="_money">收款金额</view>
+        <view class="_moneyVumber">
+          {{amountAfterTax}}
+          {{common.moneyFormatting(item.amountAfterTax)}}
+        </view>
+        <view class="_introduce">
+          <view class="_neme">任务名称</view>
+          <view class="_nemeP">{{item.taskName?item.taskName:'--'}}</view>
+        </view>
+        <view class="_task" bindtap="viewingTasks" data-taskid="{{item.taskId}}" data-tasktype="{{item.taskType}}" data-activityApproveRecordId="{{item.activityApproveRecordId}}">
+          查看对应任务
+          <em class="iconfont icon-right"></em>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="noData">
+    <view class="_img">
+      <image src="/assets/img/noData.png" mode="widthFix" lazy-load="true"></image>
+      <view class="_text">暂无数据</view>
+    </view>
+  </view>
+</view>

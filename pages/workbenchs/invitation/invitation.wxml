@@ -1,0 +1,25 @@
+<!-- 邀请函 invitation -->
+<wxs src="/utils/common.wxs" module="common" />
+<view class="_invitation">
+  <view class="_center">
+    <view class="_log1">
+      <image src="./../../../assets/img/logo.png" mode="widthFix" lazy-load="true"></image>
+    </view>
+    <view class="_name0">邀请函</view>
+    <view class="_name1">INVITATION</view>
+    <view class="_name2">{{taskActivities.activityName?taskActivities.activityName:'--'}}</view>
+    <view class="_name3">会议主题</view>
+    <view class="_name4">
+      {{taskActivities.conferenceThemeName?taskActivities.conferenceThemeName:'--'}}
+    </view>
+    <view class="_name3">会议时间</view>
+    <view class="_name4">
+      {{common.formatDate((taskActivities.activityDate + taskActivities.activityTime + 28800000),"time")}}
+    </view>
+    <view class="_name3">会议地点</view>
+    <view class="_name4">
+      {{taskActivities.activityLocation?taskActivities.activityLocation:'--'}}
+    </view>
+    <button class="_share" open-type="share" wx:if="{{shareShow}}">分享</button>
+  </view>
+</view>

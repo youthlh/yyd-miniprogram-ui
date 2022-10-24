@@ -1,0 +1,1 @@
+const Log={initSdk:"INIT_SDK",getConfig:"GET_CONFIG",webViewResult:"WEBVIEW_RESULT",webViewError:"WEBVIEW_ERROR",navigateToEid:"NAVIGATE_TO_EID",navigateBackFromEid:"NAVIGATE_BACK_FROM_EID",registerEid:"REGISTER_EID",registerEidFail:"REGISTER_EID_FAIL"};export default Log;

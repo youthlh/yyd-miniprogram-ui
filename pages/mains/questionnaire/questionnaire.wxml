@@ -1,0 +1,69 @@
+<!-- 问卷 协议 签名 questionnaire -->
+<view class="_questionnaire">
+  <view>
+    <view class="_header">
+      <view class="_p1">{{ questionnaireTemplate.questionnaireName }}</view>
+    </view>
+    <form
+      catchsubmit="formSubmit"
+      bindreset="formReset"
+      class="_subject"
+    >
+      <view
+        class="form_item"
+        wx:for="{{questionnaireTemplate.questionnaireQuestions}}"
+        wx:for-index="index"
+        wx:key="index"
+        data-index="{{index}}"
+      >
+        <!-- 单选题 -->
+        <view class="_singleSelection" wx:if="{{item.questionType === 1}}">
+          <view class="_title {{item.mustAnswer === 1 ? '_must' : ''}}">
+            {{ index + 1 }}.{{ item.questionTitle }}
+          </view>
+          <radio-group class="_options" name="subject{{index}}">
+            <label
+              class="radio_label"
+              wx:for="{{item.questionnaireQuestionOptions}}"
+              wx:for-item="item1"
+              wx:key="index1"
+            >
+              <radio value="{{item1.optionSn}}" color="#3874F6" />
+              <view class="_text">{{item1.optionContent?item1.optionContent:'--'}}</view>
+            </label>
+          </radio-group>
+        </view>
+        <!-- 多选题 -->
+        <view class="_multipleChoice" wx:elif="{{item.questionType === 2}}">
+          <view class="_title {{item.mustAnswer === 1 ? '_must' : ''}}">
+            {{ index + 1 }}.{{ item.questionTitle }}
+          </view>
+          <checkbox-group class="_options" name="subject{{index}}">
+            <label
+              class="checkbox_label"
+              wx:for="{{item.questionnaireQuestionOptions}}"
+              wx:for-item="item1"
+              wx:key="index1"
+            >
+              <checkbox checked="{{item1.optionSn}}" value="{{item1.optionSn}}" />
+              <view class="_text">{{item1.optionContent?item1.optionContent:'--'}}</view>
+            </label>
+          </checkbox-group>
+        </view>
+        <!-- 填空题 -->
+        <view class="_gapFilling" wx:elif="{{item.questionType === 3}}">
+          <view class="_title {{item.mustAnswer === 1 ? '_must' : ''}}">
+            {{ index + 1 }}.{{ item.questionTitle }}
+          </view>
+          <input name="subject{{index}}" />
+        </view>
+      </view>
+      <!-- 底部 -->
+      <view class="sub_wrap">
+        <button formType="submit">继续认证</button>
+        <button class="_but" bindtap="goBack">返回</button>
+      </view>
+    </form>
+  </view>
+</view>
+

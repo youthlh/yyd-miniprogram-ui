@@ -1,0 +1,96 @@
+@import "./assets/icon/iconfont.wxss";
+
+page {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	box-sizing: border-box;
+}
+
+view,
+button {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0
+}
+
+button {
+	border-radius: 10rpx !important;
+}
+
+// 含有tab页面
+._taskHall,
+._workbench,
+._main {
+	box-sizing: border-box;
+	width: 100vw;
+	height: calc(100vh - 108rpx) !important;
+	overflow: hidden;
+	overflow-y: auto;
+	padding-bottom: env(safe-area-inset-bottom) !important;
+}
+
+// 普通没有tab页面
+//任务广场
+._taskHallList,
+._detailsQuestionnaire,
+._result,
+// 做任务
+._workbenchList,
+._newActivity,
+//活动详情+修改
+._activeData,
+._checkDetails,
+._invitation,
+._directSign,
+._personalSign,
+._alreadyTest,
+
+//我的
+._questionnaire,
+._userAgent,
+._wrapper,
+.showStatusEzt,
+._reportMain,
+._bankBinding,
+._completedTask,
+._detailedReport,
+._completedTask1,
+._billingInfo,
+//外部打开邀请函
+._invitationForeign {
+	box-sizing: border-box;
+	width: 100vw;
+	height: calc(100vh - 5rpx - env(safe-area-inset-bottom)) !important;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+.noData {
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+
+	._img {
+		margin: auto;
+		text-align: center;
+		width: 70%;
+
+		image {
+			width: 80%;
+		}
+
+		._text {
+			font-family: PingFangSC-Medium;
+			font-size: 30rpx;
+			color: #233347;
+		}
+	}
+}
+
+// 选中的radio的样式
+wx-radio .wx-radio-input.wx-radio-input-disabled {
+	background-color: #e1e1e1 !important;
+	border-color: #d1d1d1 !important;
+}

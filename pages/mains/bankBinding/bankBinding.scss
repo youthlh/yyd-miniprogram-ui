@@ -1,0 +1,134 @@
+._bankBinding {
+	width: 100%;
+	padding: 0 40rpx 0;
+	overflow: hidden;
+	box-sizing: border-box;
+
+	form {
+		.form_item {
+			display: flex;
+			border-bottom: 2rpx solid #ECECEC;
+
+			.title {
+				display: flex;
+				height: 110rpx;
+				line-height: 110rpx;
+				width: 180rpx;
+				font-family: PingFangSC-Regular;
+				font-size: 32rpx;
+				color: #111500;
+				text-align: justify;
+
+			}
+
+			._required {
+				&::before {
+					content: "*  ";
+					color: #E9565C !important;
+					width: 20rpx;
+					font-size: 34rpx;
+					height: 110rpx;
+					line-height: 120rpx;
+					display: inline-block;
+					text-align: left;
+					overflow: hidden;
+				}
+			}
+
+			.ipt {
+				flex: 1;
+				height: 110rpx;
+				line-height: 110rpx;
+				font-family: PingFangSC-Regular;
+				font-size: 30rpx;
+				color: #233347;
+			}
+
+			.iconfont {
+				margin: 0 24rpx;
+				height: 110rpx;
+				line-height: 110rpx;
+				font-size: 16px;
+				width: 32rpx;
+				color: #C2CAD4;
+			}
+
+			._address {
+				min-height: 40rpx;
+				margin: 30rpx 0 30rpx;
+				line-height: 30rpx;
+			}
+
+			._hint {
+				color: rgba(35, 51, 71, .3);
+			}
+		}
+
+		._code {
+			display: flex;
+
+			.item_left {
+				flex: 1;
+				display: flex;
+
+			}
+
+			.item_right {
+				margin: auto 0;
+				height: 48rpx;
+
+				.btn {
+					display: block;
+					height: 48rpx;
+					font-family: PingFangSC-Regular;
+					font-size: 30rpx;
+					color: #669CF6;
+					text-align: center;
+					line-height: 48rpx;
+					width: 100%;
+					white-space: nowrap;
+				}
+
+				.iconfont {
+					color: #94A0B2;
+					width: 48rpx;
+					font-size: 44rpx;
+					margin: auto 0;
+				}
+			}
+		}
+
+		._worry {
+			height: 48rpx;
+			line-height: 48rpx;
+			font-family: PingFangSC-Regular;
+			font-size: 26rpx;
+			color: #E9565C;
+			text-align: justify;
+		}
+
+		.sub_wrap {
+			padding: 64rpx 0;
+
+			button {
+				background: #F2F2F2;
+				border-radius: 8px;
+				height: 90rpx;
+				line-height: 90rpx;
+				padding: 0;
+				font-family: PingFangSC-Regular;
+				font-size: 28rpx;
+				color: rgba(35, 51, 71, .35);
+				width: 100%;
+				box-shadow: 0 2px 4px 0 rgba(56, 116, 246, 0.10);
+			}
+		}
+
+		._down {
+			button {
+				background: #669CF6;
+				color: #FFFFFF;
+			}
+		}
+	}
+}

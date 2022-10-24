@@ -1,0 +1,788 @@
+<!-- 活动   promotion -->
+<wxs src="/utils/common.wxs" module="common" />
+<view class="_activeData">
+  <form catchsubmit="formSubmit" bindreset="formReset" wx:if="{{!hospitalIdShow}}" disabled="{{!readOnly}}">
+    <view class="_activeDataCont">
+      <!-- 1=未提交 10=已提交,待审核 11=审核不通过 20=审核通过,带验收 21=验收不通过 30=验收通过 -->
+      <view class="_titText" wx:if="{{taskActivities.activityStatus === 11}}">
+        {{taskActivities.approveReason?taskActivities.approveReason:'--'}}
+      </view>
+      <view style="padding:16rpx 20rpx 0" class="{{shadeShow?'_activeDataCont1':''}}">
+        <view wx:if="{{common.indexOfData([1,20,21,22],taskActivities.taskType) }}">
+          <view class="_header">
+            <view class="_title">
+              {{taskActivities.activityName?taskActivities.activityName:"--"}}
+            </view>
+            <view class="_corporationName">
+              <view class="_name1">
+                {{common.formatDate((taskActivities.activityDate + taskActivities.activityTime + 28800000),"date")}}
+              </view>
+              <view class="_name2">{{taskActivities.regionMc?taskActivities.regionMc:"--"}}</view>
+            </view>
+            <view class="_center">
+              <view class="_centerle" bindtap="invitations" data-activityid="{{taskActivities.activityId}}" data-taskid="{{taskActivities.taskId}}" wx:if="{{readOnly}}">
+                <view class="_icon iconfont icon-document"></view>
+                邀请函
+              </view>
+              <view class="_centerle  {{readOnly?'_centerle1':''}}" bindtap="checkDetails" data-activityid="{{taskActivities.activityId}}" data-taskid="{{taskActivities.taskId}}">
+                <view class="_icon iconfont icon-editor"></view>
+                签到详情
+              </view>
+            </view>
+          </view>
+          <view class="_details">
+            <view class="_title">基本信息</view>
+            <view wx:if="{{common.indexOfData([1],taskActivities.taskType) }}">
+              <view class="_specificationTitle">
+                会议主题：
+            {{taskActivities.conferenceThemeName?taskActivities.conferenceThemeName:"--"}}
+              </view>
+              <view class="_specificationTitle">
+                产品名称：
+                <view wx:for="{{taskActivities.taskProductSpecifications}}" wx:for-index="index" wx:key="index" data-index="{{index}}" class="_dataListChild">
+                  {{item.specificationName?item.specificationName:"--"}}
+                </view>
+              </view>
+              <view class="_specificationTitle">
+                会议地点：
+            {{taskActivities.activityLocation?taskActivities.activityLocation:"--"}}
+              </view>
+              <view class="_specificationTitle">
+                医院名称：
+            {{taskActivities.hospitalName?taskActivities.hospitalName:"--"}}
+              </view>
+              <view class="_specificationTitle">
+                医院等级：
+            {{taskActivities.gradeName?taskActivities.gradeName:"--"}}
+              </view>
+              <view class="_specificationTitle">
+                科室：
+            {{taskActivities.departmentName?taskActivities.departmentName:"--"}}
+              </view>
+            </view>
+            <view class="_specificationTitle">
+              备注：{{taskActivities.notes?taskActivities.notes:'--'}}
+            </view>
+          </view>
+          <view class="_performance">
+            <view class="_title">完成情况</view>
+            <view class="_summary">会议总结：</view>
+            <textarea :fixed="true" name="activitySummary" class="_address _marbot" disabled="{{!readOnly}}" auto-height bindinput="_bindinput" model:value="{{activitySummary}}" placeholder="请输入会议总结" placeholder-class="_hint" maxlength="5000">
+              <text class="currentWordNumber" wx:if="{{readOnly}}">
+                {{5000 -  activitySummary.length}}/5000
+              </text>
+            </textarea>
+            <view class="_summary">上传会议方案照片：</view>
+            <upload-img name="taskActivityPlanPhotos" imgList="{{taskActivityPlanPhotos}}" class="_marbot" readOnly="{{!readOnly}}" bind:getUploadImg="getUploadImg" num="{{_num}}" fileType="{{_fileType}}" urls="{{urls}}"></upload-img>
+            <view class="_summary">上传会议现场照片：</view>
+            <upload-img name="taskActivityScenePhotos" imgList="{{taskActivityScenePhotos}}" class="_marbot" readOnly="{{!readOnly}}" bind:getUploadImg="getUploadImg1" num="{{_num}}" fileType="{{_fileType}}" urls="{{urls}}"></upload-img>
+          </view>
+        </view>
+        <view wx:if="{{common.indexOfData([23],taskActivities.taskType) }}">
+          <view class="_header">
+            <view class="_title">
+              {{taskActivities.activityName?taskActivities.activityName:"--"}}
+            </view>
+            <view class="_corporationName">
+              <view class="_name1">
+                {{common.formatDate((taskActivities.activityDate + taskActivities.activityTime + 28800000),"date")}}
+              </view>
+              <view class="_name2">{{taskActivities.regionMc?taskActivities.regionMc:"--"}}</view>
+            </view>
+            <view class="_center">
+              <view class="_centerle" bindtap="checkDetailsDirect" data-activityid="{{taskActivities.activityId}}" data-taskid="{{taskActivities.taskId}}">
+                <view class="_icon iconfont icon-editor"></view>
+                签到详情
+              </view>
+            </view>
+          </view>
+          <view class="_details">
+            <view class="_title">基本信息</view>
+            <view class="_specificationTitle">
+              产品名称：
+              <view wx:for="{{taskActivities.taskProductSpecifications}}" wx:for-index="index" wx:key="index" data-index="{{index}}" class="_dataListChild">
+                {{item.specificationName?item.specificationName:"--"}}
+              </view>
+            </view>
+            <view class="_specificationTitle">
+              会议主题：
+            {{taskActivities.conferenceThemeName?taskActivities.conferenceThemeName:"--"}}
+            </view>
+            <view class="_specificationTitle">
+              会议链接：
+            {{taskActivities.conferenceLink?taskActivities.conferenceLink:"--"}}
+            </view>
+            <view class="_specificationTitle">
+              备注：{{taskActivities.notes?taskActivities.notes:'--'}}
+            </view>
+          </view>
+          <view class="_performance">
+            <view class="_title">完成情况</view>
+            <view class="_summary">会议总结：</view>
+            <textarea :fixed="true" name="activitySummary" class="_address _marbot" disabled="{{!readOnly}}" auto-height bindinput="_bindinput" model:value="{{activitySummary}}" placeholder="请输入会议总结" placeholder-class="_hint" maxlength="5000">
+              <text class="currentWordNumber" wx:if="{{readOnly}}">
+                {{5000 -  activitySummary.length}}/5000
+              </text>
+            </textarea>
+            <view class="_summary">上传方案照片：</view>
+            <upload-img name="taskActivityPlanPhotos" imgList="{{taskActivityPlanPhotos}}" class="_marbot" readOnly="{{!readOnly}}" bind:getUploadImg="getUploadImg" num="{{_num}}" fileType="{{_fileType}}" urls="{{urls}}"></upload-img>
+            <view class="_summary">上传会议截图：</view>
+            <upload-img name="taskActivityScenePhotos" imgList="{{taskActivityScenePhotos}}" class="_marbot" readOnly="{{!readOnly}}" bind:getUploadImg="getUploadImg1" num="{{_num}}" fileType="{{_fileType}}" urls="{{urls}}"></upload-img>
+          </view>
+        </view>
+        <view wx:if="{{common.indexOfData([2,3,4,5,17,24,25],taskActivities.taskType) }}">
+          <view class="_header">
+            <view class="_title">
+              {{taskActivities.activityName?taskActivities.activityName:"--"}}
+            </view>
+            <view class="_corporationName" style="height:1rpx;padding-bottom:12rpx;margin:0"></view>
+          </view>
+          <view class="_details">
+            <view class="_title">基本信息</view>
+            <view class="_specificationTitle">
+              产品名称：
+              <view wx:for="{{taskActivities.taskProductSpecifications}}" wx:for-index="index" wx:key="index" data-index="{{index}}" class="_dataListChild">
+                {{item.specificationName?item.specificationName:"--"}}
+              </view>
+            </view>
+            <view class="_specificationTitle">
+              任务地区：
+              {{taskActivities.regionMc?taskActivities.regionMc:"--"}}
+            </view>
+          </view>
+          <view class="_performance">
+            <view class="_title">完成情况</view>
+            <view class="_questionnairetask" wx:if="{{taskActivities.questionnaireId}}">
+              <view class="__questionnaireLet">
+                <view class="_questionnaireTitle">{{taskActivities.questionnaireName}}</view>
+                <view class="_p" bindtap="hasaData" data-activityid="{{taskActivities.activityId}}" data-taskid="{{taskActivities.taskId}}">
+                  <view class="_p1">已答</view>
+                  {{taskActivities.answeredCount}}
+                </view>
+              </view>
+              <view class="__questionnairerig">
+                <button class="_details" bindtap="minute" data-questionnaireid="{{taskActivities.questionnaireId}}">
+                  分享
+                </button>
+              </view>
+              <view style="clear: both"></view>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{common.indexOfData([6,7],taskActivities.taskType) }}">
+          <view class="_header">
+            <view class="_title">
+              {{taskActivities.activityName?taskActivities.activityName:"--"}}
+            </view>
+            <view class="_corporationName" style="height:1rpx;padding-bottom:12rpx;margin:0"></view>
+            <view class="_center" wx:if="{{!taskActivitySignIns.length}}">
+              <view class="_centerle" bindtap="personalSign" data-activityid="{{taskActivities.activityId}}" data-taskid="{{taskActivities.taskId}}">
+                <view class="_icon iconfont icon-document"></view>
+                签到打卡
+              </view>
+            </view>
+          </view>
+          <view class="_details">
+            <view class="_title">基本信息</view>
+            <view class="_specificationTitle" wx:if="{{taskActivitySignIns.length}}">
+              签到姓名：{{taskActivitySignIns[0]["personalName"]?taskActivitySignIns[0]["personalName"]:"--"}}
+            </view>
+            <view class="_specificationTitle" wx:if="{{taskActivitySignIns.length}}">
+              签到地址：{{taskActivitySignIns[0]["place"]?taskActivitySignIns[0]["place"]:"--"}}
+            </view>
+            <view class="_specificationTitle" wx:if="{{taskActivitySignIns.length}}">
+              签到时间：{{common.formatDate(taskActivitySignIns[0].createTime,"time")}}
+            </view>
+            <view class="_specificationTitle">
+              产品名称：
+              <view wx:for="{{taskActivities.taskProductSpecifications}}" wx:for-index="index" wx:key="index" data-index="{{index}}" class="_dataListChild">
+                {{item.specificationName?item.specificationName:"--"}}
+                {{taskActivities.taskProductSpecifications.length===1?'':index < taskActivities.taskProductSpecifications.length-1?',':''}}
+              </view>
+            </view>
+            <view class="_specificationTitle">
+              任务地区：{{taskActivities.regionMc?taskActivities.regionMc:"--"}}
+            </view>
+            <view class="_specificationTitle">
+              地点：
+            {{taskActivities.activityLocation?taskActivities.activityLocation:"--"}}
+            </view>
+            <!-- 1=其他 2=综合医院 3=专科医院,0表示没有此配置 -->
+            <view class="_specificationTitle" wx:if="{{taskActivities.hospitalClassification===1}}">
+              医院类别：其他
+            </view>
+            <view class="_specificationTitle" wx:elif="{{taskActivities.hospitalClassification===2}}">
+              医院类别：综合医院
+            </view>
+            <view class="_specificationTitle" wx:elif="{{taskActivities.hospitalClassification===3}}">
+              医院类别：专科医院
+            </view>
+            <view class="_specificationTitle" wx:else>医院类别：--</view>
+            <view class="_specificationTitle">
+              医院名称：
+            {{taskActivities.hospitalName?taskActivities.hospitalName:"--"}}
+            </view>
+            <view class="_specificationTitle">
+              医院等级：
+            {{taskActivities.gradeName?taskActivities.gradeName:"--"}}
+            </view>
+            <view class="_specificationTitle">
+              科室：
+            {{taskActivities.departmentName?taskActivities.departmentName:"--"}}
+            </view>
+            <view class="_specificationTitle">
+              手术类别：
+            {{taskActivities.operationClassification?taskActivities.operationClassification:"--"}}
+            </view>
+            <view class="_specificationTitle">
+              服务类别：
+            {{taskActivities.serviceClassificationName?taskActivities.serviceClassificationName:"--"}}
+            </view>
+            <view class="_specificationTitle">
+              备注：{{taskActivities.notes?taskActivities.notes:'--'}}
+            </view>
+          </view>
+          <view class="_performance">
+            <view class="_title">完成情况</view>
+            <view wx:if="{{taskActivities.taskType===6}}">
+              <view class="_summary">服务型跟台总结：</view>
+              <textarea :fixed="true" name="activitySummary" class="_address _marbot" disabled="{{!readOnly}}" auto-height bindinput="_bindinput" model:value="{{activitySummary}}" placeholder="请输入服务型跟台总结" placeholder-class="_hint" maxlength="5000">
+                <text class="currentWordNumber" wx:if="{{readOnly}}">
+                  {{5000 -  activitySummary.length}}/5000
+                </text>
+              </textarea>
+            </view>
+            <view wx:elif="{{taskActivities.taskType===7}}">
+              <view class="_summary">技术型跟台总结：</view>
+              <textarea :fixed="true" name="activitySummary" class="_address _marbot" disabled="{{!readOnly}}" auto-height bindinput="_bindinput" model:value="{{activitySummary}}" placeholder="请输入技术型跟台总结" placeholder-class="_hint" maxlength="5000">
+                <text class="currentWordNumber" wx:if="{{readOnly}}">
+                  {{5000 -  activitySummary.length}}/5000
+                </text>
+              </textarea>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{common.indexOfData([8,9,10],taskActivities.taskType) }}">
+          <view class="_header">
+            <view class="_title">
+              {{taskActivities.activityName?taskActivities.activityName:"--"}}
+            </view>
+            <view class="_corporationName" style="height:1rpx;padding-bottom:12rpx;margin:0"></view>
+          </view>
+          <view class="_details">
+            <view class="_title">基本信息</view>
+            <view class="_specificationTitle">
+              产品名称：
+              <view wx:for="{{taskActivities.taskProductSpecifications}}" wx:for-index="index" wx:key="index" data-index="{{index}}" class="_dataListChild">
+                {{item.specificationName?item.specificationName:"--"}}
+              </view>
+            </view>
+            <view class="_specificationTitle">
+              任务地区：
+              {{taskActivities.regionMc?taskActivities.regionMc:"--"}}
+            </view>
+          </view>
+          <view class="_performance">
+            <view class="_title">完成情况</view>
+            <view wx:if="{{taskActivities.taskType===8}}">
+              <view class="_summary">招标服务总结：</view>
+              <textarea :fixed="true" name="activitySummary" class="_address _marbot" disabled="{{!readOnly}}" auto-height bindinput="_bindinput" model:value="{{activitySummary}}" placeholder="请输入招标服务总结" placeholder-class="_hint" maxlength="5000">
+                <text class="currentWordNumber" wx:if="{{readOnly}}">
+                  {{5000 -  activitySummary.length}}/5000
+                </text>
+              </textarea>
+            </view>
+            <view wx:elif="{{taskActivities.taskType===9}}">
+              <view class="_summary">二次议价总结：</view>
+              <textarea :fixed="true" name="activitySummary" class="_address _marbot" disabled="{{!readOnly}}" auto-height bindinput="_bindinput" model:value="{{activitySummary}}" placeholder="请输入二次议价总结" placeholder-class="_hint" maxlength="5000">
+                <text class="currentWordNumber" wx:if="{{readOnly}}">
+                  {{5000 -  activitySummary.length}}/5000
+                </text>
+              </textarea>
+            </view>
+            <view wx:elif="{{taskActivities.taskType===10}}">
+              <view class="_summary">新品挂网总结：</view>
+              <textarea :fixed="true" name="activitySummary" class="_address _marbot" disabled="{{!readOnly}}" auto-height bindinput="_bindinput" model:value="{{activitySummary}}" placeholder="请输入新品挂网总结" placeholder-class="_hint" maxlength="5000">
+                <text class="currentWordNumber" wx:if="{{readOnly}}">
+                  {{5000 -  activitySummary.length}}/5000
+                </text>
+              </textarea>
+            </view>
+            <view class="_summary topMargin" wx:if="{{taskActivities.taskType===8}}">
+              上传中标通知照片：
+            </view>
+            <view class="_summary  topMargin" wx:elif="{{taskActivities.taskType===9}}">
+              上传议价通知书：
+            </view>
+            <view class="_summary  topMargin" wx:elif="{{taskActivities.taskType===10}}">
+              上传挂网通知书：
+            </view>
+            <upload-img name="taskActivityPhotos" imgList="{{taskActivityPhotos}}" class="_marbot" readOnly="{{!readOnly}}" bind:getUploadImg="getUploadtaskActivityPhotos" num="{{_num}}" fileType="{{_fileType}}" urls="{{urls}}"></upload-img>
+          </view>
+        </view>
+        <view wx:if="{{common.indexOfData([16],taskActivities.taskType) }}">
+          <view class="_header">
+            <view class="_title">
+              {{taskActivities.activityName?taskActivities.activityName:"--"}}
+            </view>
+            <view class="_corporationName" style="height:1rpx;padding-bottom:12rpx;margin:0"></view>
+          </view>
+          <view class="_performance">
+            <view class="_title">完成情况</view>
+            <view class="_summary">商业流向数据收集总结：</view>
+            <textarea :fixed="true" name="activitySummary" class="_address _marbot" disabled="{{!readOnly}}" auto-height bindinput="_bindinput" model:value="{{activitySummary}}" placeholder="请输入商业流向数据收集总结" placeholder-class="_hint" maxlength="5000">
+              <text class="currentWordNumber" wx:if="{{readOnly}}">
+                {{5000 -  activitySummary.length}}/5000
+              </text>
+            </textarea>
+            <view class="_summary">上传商业流向数据照片：</view>
+            <upload-img name="taskActivityPhotos" imgList="{{taskActivityPhotos}}" class="_marbot" readOnly="{{!readOnly}}" bind:getUploadImg="getUploadtaskActivityPhotos" num="{{_num}}" fileType="{{_fileType}}" urls="{{urls}}"></upload-img>
+          </view>
+        </view>
+        <view wx:if="{{common.indexOfData([11,12,13],taskActivities.taskType) }}">
+          <view class="_header">
+            <view class="_title">
+              {{taskActivities.activityName?taskActivities.activityName:"--"}}
+            </view>
+            <view class="_corporationName" style="height:1rpx;padding-bottom:12rpx;margin:0"></view>
+          </view>
+          <view class="_details">
+            <view class="_title">基本信息</view>
+            <view class="_specificationTitle">
+              产品名称：
+              <view wx:for="{{taskActivities.taskProductSpecifications}}" wx:for-index="index" wx:key="index" data-index="{{index}}" class="_dataListChild">
+                {{item.specificationName?item.specificationName:"--"}}
+              </view>
+            </view>
+            <view class="_specificationTitle">
+              任务地区：
+              {{taskActivities.regionMc?taskActivities.regionMc:"--"}}
+            </view>
+          </view>
+          <view class="_performance _activeFrom">
+            <view class="form_item">
+              <text class="title  _required">医院类别</text>
+              <picker name="hospitalClassification" value="{{hospitalClassificationIndex}}" range-key="{{'label'}}" range="{{hospitalClassifications}}" bindchange="bindPickerChange" data-type="hospitalClassificationIndex">
+                <view class="_picker">
+                  {{hospitalClassifications[hospitalClassificationIndex].label}}
+                </view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">医院性质</text>
+              <picker name="hospitalNature" value="{{hospitalNatureIndex}}" range-key="{{'label'}}" range="{{hospitalNatures}}" bindchange="bindPickerChange" data-type="hospitalNatureIndex">
+                <view class="_picker">{{hospitalNatures[hospitalNatureIndex].label}}</view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">医院名称</text>
+              <input class="ipt" name="hospitalId" disabled bindinput="_bindinput" bindtap="_bindhospitalId" model:value="{{hospitalIdsSelect.hospitalName}}" data-type="activityName" placeholder="请选择医院名称" placeholder-class="_hint"></input>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">科室</text>
+              <input class="ipt" name="departmentName" bindinput="_bindinput" model:value="{{departmentName}}" data-type="departmentName" placeholder="请输入科室名称" placeholder-class="_hint" maxlength="30"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{departmentName.length}}" data-type="departmentName"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">门诊日流量(人次)</text>
+              <input class="ipt" name="outpatientDailyCount" bindinput="_bindinput" model:value="{{outpatientDailyCount}}" data-type="outpatientDailyCount" placeholder="请输入门诊日流量(人次)" placeholder-class="_hint" maxlength="8" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{outpatientDailyCount.length}}" data-type="outpatientDailyCount"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">医生数量(人)</text>
+              <input class="ipt" name="doctorCount" bindinput="_bindinput" model:value="{{doctorCount}}" data-type="doctorCount" placeholder="请输入医生数量(人)" placeholder-class="_hint" maxlength="4" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{doctorCount.length}}" data-type="doctorCount"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">床位数量(张)</text>
+              <input class="ipt" name="bedCount" bindinput="_bindinput" model:value="{{bedCount}}" data-type="bedCount" placeholder="请输入床位数量(张)" placeholder-class="_hint" maxlength="4" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{bedCount.length}}" data-type="bedCount"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">竞品名称</text>
+              <input class="ipt" name="competitorName" bindinput="_bindinput" model:value="{{competitorName}}" data-type="competitorName" placeholder="请输入竞品名称" placeholder-class="_hint" maxlength="30"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{competitorName.length}}" data-type="competitorName"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">竞品月销量</text>
+              <input class="ipt" name="competitorMonthlySales" bindinput="_bindinput" model:value="{{competitorMonthlySales}}" data-type="competitorMonthlySales" placeholder="请输入竞品月销量" placeholder-class="_hint" maxlength="30" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{competitorMonthlySales.length}}" data-type="competitorMonthlySales"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">药事会召开频率</text>
+              <picker name="pharmaceuticalMeetingFrequency" value="{{pharmaceuticalMeetingFrequencyIndex}}" range-key="{{'label'}}" range="{{pharmaceuticalMeetingFrequencys}}" bindchange="bindPickerChange" data-type="pharmaceuticalMeetingFrequencyIndex">
+                <view class="_picker">
+                  {{pharmaceuticalMeetingFrequencys[pharmaceuticalMeetingFrequencyIndex].label}}
+                </view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required _titleLong">有无慢病医保点或老年医学科</text>
+              <picker name="existProblem" value="{{existProblemIndex}}" range-key="{{'label'}}" range="{{existProblems}}" bindchange="bindPickerChange" data-type="existProblemIndex">
+                <view class="_picker">{{existProblems[existProblemIndex].label}}</view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item  _note">
+              <text class="title  _required">医院优势及潜力</text>
+              <textarea :fixed="true" class="ipt _address" auto-height disabled="{{!readOnly}}" name="hospitalAdvantage" bindinput="_bindinput" model:value="{{hospitalAdvantage}}" data-type="hospitalAdvantage" placeholder="请输入医院优势及潜力" placeholder-class="_hint" maxlength="5000">
+                <text class="currentWordNumber" wx:if="{{readOnly}}">
+                  {{5000 -  hospitalAdvantage.length}}/5000
+                </text>
+              </textarea>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{common.indexOfData([14,15],taskActivities.taskType) }}">
+          <view class="_header">
+            <view class="_title">
+              {{taskActivities.activityName?taskActivities.activityName:"--"}}
+            </view>
+            <view class="_corporationName" style="height:1rpx;padding-bottom:12rpx;margin:0"></view>
+          </view>
+          <view class="_details">
+            <view class="_title">基本信息</view>
+            <view class="_specificationTitle">
+              产品名称：
+              <view wx:for="{{taskActivities.taskProductSpecifications}}" wx:for-index="index" wx:key="index" data-index="{{index}}" class="_dataListChild">
+                {{item.specificationName?item.specificationName:"--"}}
+              </view>
+              <view class="_specificationTitle">
+                任务地区：
+              {{taskActivities.regionMc?taskActivities.regionMc:"--"}}
+              </view>
+            </view>
+          </view>
+          <view class="_performance _activeFrom">
+            <view class="form_item" wx:if="{{common.indexOfData([14],taskActivities.taskType) }}">
+              <text class="title  _required">连锁药店规模(家)</text>
+              <input class="ipt" name="chainDrugstoresScale" bindinput="_bindinput" model:value="{{chainDrugstoresScale}}" data-type="chainDrugstoresScale" placeholder="请输入连锁药店规模(家)" placeholder-class="_hint" maxlength="8" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{chainDrugstoresScale.length}}" data-type="chainDrugstoresScale"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">药店名称</text>
+              <input class="ipt" name="drugstoreName" bindinput="_bindinput" model:value="{{drugstoreName}}" data-type="drugstoreName" placeholder="请输入药店名称" placeholder-class="_hint" maxlength="30"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{drugstoreName.length}}" data-type="drugstoreName"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required _title14">药店日客流量(人次)</text>
+              <input class="ipt" name="drugstoreDailyCount" bindinput="_bindinput" model:value="{{drugstoreDailyCount}}" data-type="drugstoreDailyCount" placeholder="药店日客流量(人次)" placeholder-class="_hint" maxlength="8" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{drugstoreDailyCount.length}}" data-type="drugstoreDailyCount"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required  _title14">竞品名称(销量第1名)</text>
+              <input class="ipt" name="firstCompetitorName" bindinput="_bindinput" model:value="{{firstCompetitorName}}" data-type="firstCompetitorName" placeholder="请输入竞品名称(销量第1名)" placeholder-class="_hint" maxlength="30"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{firstCompetitorName.length}}" data-type="firstCompetitorName"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required  _title14">竞品月销量(销量第1名)</text>
+              <input class="ipt" name="firstCompetitorMonthlySales" bindinput="_bindinput" model:value="{{firstCompetitorMonthlySales}}" data-type="firstCompetitorMonthlySales" placeholder="请输入竞品月销量(销量第1名)" placeholder-class="_hint" maxlength="30" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{firstCompetitorMonthlySales.length}}" data-type="firstCompetitorMonthlySales"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required  _title14">竞品名称(销量第2名)</text>
+              <input class="ipt" name="secondCompetitorName" bindinput="_bindinput" model:value="{{secondCompetitorName}}" data-type="secondCompetitorName" placeholder="请输入竞品名称(销量第2名)" placeholder-class="_hint" maxlength="30"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{secondCompetitorName.length}}" data-type="secondCompetitorName"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required  _title14">竞品月销量(销量第2名)</text>
+              <input class="ipt" name="secondCompetitorMonthlySales" bindinput="_bindinput" model:value="{{secondCompetitorMonthlySales}}" data-type="secondCompetitorMonthlySales" placeholder="请输入竞品月销量(销量第2名)" placeholder-class="_hint" maxlength="30" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{secondCompetitorMonthlySales.length}}" data-type="secondCompetitorMonthlySales"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">促销活动频次</text>
+              <picker name="promotionalActivityFrequency" value="{{promotionalActivityFrequencyIndex}}" range-key="{{'label'}}" range="{{promotionalActivityFrequencys}}" bindchange="bindPickerChange" data-type="promotionalActivityFrequencyIndex">
+                <view class="_picker">
+                  {{promotionalActivityFrequencys[promotionalActivityFrequencyIndex].label}}
+                </view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">是否支持医保</text>
+              <picker name="whetherMedicalInsurance" value="{{whetherMedicalInsuranceIndex}}" range-key="{{'label'}}" range="{{whetherMedicalInsurances}}" bindchange="bindPickerChange" data-type="whetherMedicalInsuranceIndex">
+                <view class="_picker">
+                  {{whetherMedicalInsurances[whetherMedicalInsuranceIndex].label}}
+                </view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item _note">
+              <text class="title _required ">药店优势</text>
+              <textarea :fixed="true" class="ipt _address" auto-height name="drugstoreAdvantage" disabled="{{!readOnly}}" bindinput="_bindinput" model:value="{{drugstoreAdvantage}}" data-type="drugstoreAdvantage" placeholder="请输入药店优势" placeholder-class="_hint" maxlength="5000">
+                <text class="currentWordNumber" wx:if="{{readOnly}}">
+                  {{5000 -    drugstoreAdvantage.length}}/5000
+                </text>
+              </textarea>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{common.indexOfData([18],taskActivities.taskType)}}">
+          <view class="_header">
+            <view class="_title">
+              {{taskActivities.activityName?taskActivities.activityName:"--"}}
+            </view>
+            <view class="_corporationName" style="height:1rpx;padding-bottom:12rpx;margin:0"></view>
+          </view>
+          <view class="_details">
+            <view class="_title">基本信息</view>
+            <view class="_specificationTitle">
+              产品名称：
+              <view wx:for="{{taskActivities.taskProductSpecifications}}" wx:for-index="index" wx:key="index" data-index="{{index}}" class="_dataListChild">
+                {{item.specificationName?item.specificationName:"--"}}
+              </view>
+            </view>
+            <view class="_specificationTitle">
+              任务地区：{{taskActivities.regionMc?taskActivities.regionMc:"--"}}
+            </view>
+          </view>
+          <view class="_performance _activeFrom">
+            <view class="form_item">
+              <text class="title  _required">药店类别</text>
+              <picker name="drugstoreClassification" value="{{drugstoreClassificationIndex}}" range-key="{{'label'}}" range="{{drugstoreClassifications}}" bindchange="bindPickerChange" data-type="drugstoreClassificationIndex">
+                <view class="_picker">
+                  {{drugstoreClassifications[drugstoreClassificationIndex].label}}
+                </view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">药店名称</text>
+              <input class="ipt" name="drugstoreName" bindinput="_bindinput" model:value="{{drugstoreName}}" data-type="drugstoreName" placeholder="请输入药店名称" placeholder-class="_hint" maxlength="30"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{drugstoreName.length}}" data-type="drugstoreName"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">陈列位置</text>
+              <picker name="displayLocation" value="{{displayLocationIndex}}" range-key="{{'label'}}" range="{{displayLocations}}" bindchange="bindPickerChange" data-type="displayLocationIndex">
+                <view class="_picker">{{displayLocations[displayLocationIndex].label}}</view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">陈列效果</text>
+              <picker name="displayEffect" value="{{displayEffectIndex}}" range-key="{{'label'}}" range="{{displayEffects}}" bindchange="bindPickerChange" data-type="displayEffectIndex">
+                <view class="_picker">{{displayEffects[displayEffectIndex].label}}</view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">产品销量</text>
+              <picker name="productSales" value="{{productSalesIndex}}" range-key="{{'label'}}" range="{{productSaless}}" bindchange="bindPickerChange" data-type="productSalesIndex">
+                <view class="_picker">{{productSaless[productSalesIndex].label}}</view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">产品库存</text>
+              <picker name="productInventory" value="{{productInventoryIndex}}" range-key="{{'label'}}" range="{{productInventorys}}" bindchange="bindPickerChange" data-type="productInventoryIndex">
+                <view class="_picker">{{productInventorys[productInventoryIndex].label}}</view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">竞品名称</text>
+              <input class="ipt" name="competitorName" bindinput="_bindinput" model:value="{{competitorName}}" data-type="competitorName" placeholder="请输入竞品名称" placeholder-class="_hint" maxlength="30"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{competitorName.length}}" data-type="competitorName"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">竞品月销量</text>
+              <input class="ipt" name="competitorMonthlySales" bindinput="_bindinput" model:value="{{competitorMonthlySales}}" data-type="competitorMonthlySales" placeholder="请输入竞品名称" placeholder-class="_hint" maxlength="30" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{competitorMonthlySales.length}}" data-type="competitorMonthlySales"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">促销频次评估</text>
+              <picker name="promotionFrequency" value="{{promotionFrequencyIndex}}" range-key="{{'label'}}" range="{{promotionFrequencys}}" bindchange="bindPickerChange" data-type="promotionFrequencyIndex">
+                <view class="_picker">{{promotionFrequencys[promotionFrequencyIndex].label}}</view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">促销效果</text>
+              <picker name="promotionEffect" value="{{promotionEffectIndex}}" range-key="{{'label'}}" range="{{promotionEffects}}" bindchange="bindPickerChange" data-type="promotionEffectIndex">
+                <view class="_picker">{{promotionEffects[promotionEffectIndex].label}}</view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">是否支持医保</text>
+              <picker name="whetherMedicalInsurance" value="{{whetherMedicalInsuranceIndex}}" range-key="{{'label'}}" range="{{whetherMedicalInsurances}}" bindchange="bindPickerChange" data-type="whetherMedicalInsuranceIndex">
+                <view class="_picker">
+                  {{whetherMedicalInsurances[whetherMedicalInsuranceIndex].label}}
+                </view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item _note">
+              <text class="title _required ">督导结论</text>
+              <textarea :fixed="true" class="ipt _address" auto-height name="supervisorConclusion" disabled="{{!readOnly}}" bindinput="_bindinput" model:value="{{supervisorConclusion}}" data-type="supervisorConclusion" placeholder="请输入督导结论" placeholder-class="_hint" maxlength="5000">
+                <text class="currentWordNumber" wx:if="{{readOnly}}">
+                  {{5000 - supervisorConclusion.length}}/5000
+                </text>
+              </textarea>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{common.indexOfData([19],taskActivities.taskType) }}">
+          <view class="_header">
+            <view class="_title">
+              {{taskActivities.activityName?taskActivities.activityName:"--"}}
+            </view>
+            <view class="_corporationName" style="height:1rpx;padding-bottom:12rpx;margin:0"></view>
+          </view>
+          <view class="_details">
+            <view class="_title">基本信息</view>
+            <view class="_specificationTitle">
+              产品名称：
+              <view wx:for="{{taskActivities.taskProductSpecifications}}" wx:for-index="index" wx:key="index" data-index="{{index}}" class="_dataListChild">
+                {{item.specificationName?item.specificationName:"--"}}
+              </view>
+            </view>
+            <view class="_specificationTitle">
+              任务地区：{{taskActivities.regionMc?taskActivities.regionMc:"--"}}
+            </view>
+          </view>
+          <view class="_performance _activeFrom">
+            <view class="form_item">
+              <text class="title  _required">药店类别</text>
+              <picker name="drugstoreClassification" model:value="{{drugstoreClassificationIndex}}" range-key="{{'label'}}" range="{{drugstoreClassifications}}" bindchange="bindPickerChange" data-type="drugstoreClassificationIndex">
+                <view class="_picker">
+                  {{drugstoreClassifications[drugstoreClassificationIndex].label}}
+                </view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item" wx:if="{{drugstoreClassificationIndex != 0 }}">
+              <text class="title  _required">连锁药店规模(家)</text>
+              <input class="ipt" name="chainDrugstoresScale" bindinput="_bindinput" model:value="{{chainDrugstoresScale}}" data-type="chainDrugstoresScale" placeholder="请输入连锁药店规模(家)" placeholder-class="_hint" maxlength="8" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{chainDrugstoresScale.length}}" data-type="chainDrugstoresScale"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">药店名称</text>
+              <input class="ipt" name="drugstoreName" bindinput="_bindinput" model:value="{{drugstoreName}}" data-type="drugstoreName" placeholder="请输入药店名称" placeholder-class="_hint" maxlength="30"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{drugstoreName.length}}" data-type="drugstoreName"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required _title14">药店日客流量(人次)</text>
+              <input class="ipt" name="drugstoreDailyCount" bindinput="_bindinput" model:value="{{drugstoreDailyCount}}" data-type="drugstoreDailyCount" placeholder="药店日客流量(人次)" placeholder-class="_hint" maxlength="8" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{drugstoreDailyCount.length}}" data-type="drugstoreDailyCount"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required  _title14">竞品名称(销量第1名)</text>
+              <input class="ipt" name="firstCompetitorName" bindinput="_bindinput" model:value="{{firstCompetitorName}}" data-type="firstCompetitorName" placeholder="请输入竞品名称(销量第1名)" placeholder-class="_hint" maxlength="30"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{firstCompetitorName.length}}" data-type="firstCompetitorName"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required  _title14">竞品月销量(销量第1名)</text>
+              <input class="ipt" name="firstCompetitorMonthlySales" bindinput="_bindinput" model:value="{{firstCompetitorMonthlySales}}" data-type="firstCompetitorMonthlySales" placeholder="请输入竞品月销量(销量第1名)" placeholder-class="_hint" maxlength="30" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{firstCompetitorMonthlySales.length}}" data-type="firstCompetitorMonthlySales"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required  _title14">竞品名称(销量第2名)</text>
+              <input class="ipt" name="secondCompetitorName" bindinput="_bindinput" model:value="{{secondCompetitorName}}" data-type="secondCompetitorName" placeholder="请输入竞品名称(销量第2名)" placeholder-class="_hint" maxlength="30"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{secondCompetitorName.length}}" data-type="secondCompetitorName"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required  _title14">竞品月销量(销量第2名)</text>
+              <input class="ipt" name="secondCompetitorMonthlySales" bindinput="_bindinput" model:value="{{secondCompetitorMonthlySales}}" data-type="secondCompetitorMonthlySales" placeholder="请输入竞品月销量(销量第2名)" placeholder-class="_hint" maxlength="30" type="number"></input>
+              <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{secondCompetitorMonthlySales.length}}" data-type="secondCompetitorMonthlySales"></view>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">促销活动频次</text>
+              <picker name="promotionalActivityFrequency" value="{{promotionalActivityFrequencyIndex}}" range-key="{{'label'}}" range="{{promotionalActivityFrequencys}}" bindchange="bindPickerChange" data-type="promotionalActivityFrequencyIndex">
+                <view class="_picker">
+                  {{promotionalActivityFrequencys[promotionalActivityFrequencyIndex].label}}
+                </view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item">
+              <text class="title  _required">是否支持医保</text>
+              <picker name="whetherMedicalInsurance" value="{{whetherMedicalInsuranceIndex}}" range-key="{{'label'}}" range="{{whetherMedicalInsurances}}" bindchange="bindPickerChange" data-type="whetherMedicalInsuranceIndex">
+                <view class="_picker">
+                  {{whetherMedicalInsurances[whetherMedicalInsuranceIndex].label}}
+                </view>
+              </picker>
+              <em class="iconfont icon-right"></em>
+            </view>
+            <view class="form_item _note">
+              <text class="title _required ">拜访总结</text>
+              <textarea :fixed="true" class="ipt _address" auto-height name="visitSummary" disabled="{{!readOnly}}" bindinput="_bindinput" model:value="{{visitSummary}}" data-type="visitSummary" placeholder="请输入拜访总结" placeholder-class="_hint" maxlength="5000">
+                <text class="currentWordNumber" wx:if="{{readOnly}}">
+                  {{5000 - visitSummary.length}}/5000
+                </text>
+              </textarea>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view style="padding:0 20rpx 0;margin-top:-40rpx" wx:if="{{common.indexOfData([11,12,13,14,15],taskActivities.taskType) }}">
+        <view class="_performance _activeFrom  _activeFromTest">
+          <view class="form_item _note">
+            <text class="title  _required  _titleLong">准入成功流向单照片：</text>
+            <upload-img name="taskActivityPhotos" imgList="{{taskActivityPhotos}}" class="_marbot" readOnly="{{!readOnly}}" bind:getUploadImg="getUploadtaskActivityPhotos" num="{{_num}}" numSum="3" fileType="{{_fileType}}" urls="{{urls}}"></upload-img>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{common.indexOfData([2,3,4,5,17,24,25],taskActivities.taskType) }}">
+      <view class="_bot" wx:if="{{readOnly}}">
+        <view class="_socket" bindtap="_recompose" data-activityid="{{taskActivities.activityId}}" data-taskid="{{taskActivities.taskId}}" wx:if="{{!taskActivities.answeredCount}}">
+          <em class="icon iconfont icon-brush"></em>
+          修改
+        </view>
+        <view class="_socket" bindtap="_delete" data-activityid="{{taskActivities.activityId}}" wx:if="{{!taskActivities.answeredCount}}">
+          <em class="icon iconfont icon-trash"></em>
+          删除
+        </view>
+        <button class="_immediately  {{!taskActivities.answeredCount?'_immediately1':''}}" formType="submit">
+          提交活动
+        </button>
+      </view>
+      <view class="_bot" wx:else>
+        <button class="_immediately" bindtap="_back">返回</button>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="_bot" wx:if="{{readOnly}}">
+        <view class="_socket" bindtap="_recompose" data-activityid="{{taskActivities.activityId}}" data-taskid="{{taskActivities.taskId}}" wx:if="{{!taskActivities.signInCount}}">
+          <em class="icon iconfont icon-brush"></em>
+          修改
+        </view>
+        <view class="_socket" bindtap="_delete" data-activityid="{{taskActivities.activityId}}" wx:if="{{!taskActivities.signInCount}}">
+          <em class="icon iconfont icon-trash"></em>
+          删除
+        </view>
+        <button class="_immediately  {{!taskActivities.signInCount?'_immediately1':''}}" formType="submit">
+          提交活动
+        </button>
+      </view>
+      <view class="_bot" wx:else>
+        <button class="_immediately" bindtap="_back">返回</button>
+      </view>
+    </view>
+  </form>
+  <view class="_hospitalLevel" wx:else>
+    <view class="_head">
+      <em class="iconfont  icon-search" bindtap="bindconfirm"></em>
+      <input bindinput="_bindinput" confirm-type="search" model:value="{{hospitalLevelText}}" placeholder="请输入医院名称" placeholder-class="_hint" bindconfirm="bindconfirm"></input>
+      <view class="iconfont1 iconfont  icon-close" bindtap="delIpt1" wx:if="{{hospitalLevelText.length}}" data-type="hospitalLevelText"></view>
+    </view>
+    <scroll-view scroll-y='true' style="height:calc(100% -  90rpx)" bindscrolltolower='lower' wx:if="{{hospitalIds.length}}">
+      <view class="_hospitalLevelCont">
+        <view wx:for="{{hospitalIds}}" wx:for-index="index" wx:key="index" data-index="{{index}}" class="_list" bindtap="hospitalIdsList" data-hospitalid="{{item.hospitalId}}" data-hospitalname="{{item.hospitalName}}">
+          {{item.hospitalName}}
+        </view>
+      </view>
+    </scroll-view>
+    <view wx:else class="noData">
+      <view class="_img">
+        <image src="/assets/img/noData.png" mode="widthFix" lazy-load="true"></image>
+        <view class="_text">暂无数据</view>
+      </view>
+    </view>
+  </view>
+</view>

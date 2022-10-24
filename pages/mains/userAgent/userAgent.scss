@@ -1,0 +1,103 @@
+._userAgent {
+
+    .contents {
+        padding: 60rpx 40rpx 50rpx;
+    }
+
+    ._signature {
+        height: 280rpx;
+        width: calc(100% - 80rpx);
+        background: #F6F8F9;
+        display: flex;
+        position: relative;
+        margin: 0 auto;
+        overflow: hidden;
+
+        image {
+            transform: rotate(-90deg);
+            width: 280rpx;
+            height: calc(100vw - 80rpx);
+            margin: 0 auto;
+            margin-top: calc(180rpx - 50vw);
+        }
+
+        ._handle {
+            height: 40rpx;
+            line-height: 40rpx;
+            display: flex;
+            font-family: PingFangSC-Regular;
+            font-size: 28rpx;
+            color: #94A0B2;
+
+            text-align: justify;
+            position: absolute;
+            bottom: 30rpx;
+            right: 34rpx;
+
+            em {
+                width: 40rpx;
+                text-align: center;
+                height: 40rpx;
+                line-height: 40rpx;
+                font-size: 28rpx;
+                margin-right: 9rpx;
+            }
+        }
+    }
+
+    .checkbox {
+        padding: 50rpx 40rpx 0;
+        margin: 0 0 76rpx;
+        height: 36rpx;
+        line-height: 36rpx;
+        display: flex;
+
+        ._group {
+            display: flex;
+
+            checkbox {
+                scale: .8;
+                margin-top: -5rpx;
+            }
+        }
+
+
+        font-family: PingFangSC-Regular;
+        font-size: 26rpx;
+        color: rgba(51, 51, 51, .5);
+
+        text-align: justify;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 0 40rpx;
+        box-sizing: border-box;
+
+        button {
+            margin-bottom: 40rpx;
+            padding: 0;
+            box-sizing: border-box;
+            width: 100%;
+            height: 90rpx;
+            line-height: 90rpx;
+            background: #669CF6;
+            border-radius: 16rpx;
+            font-family: PingFangSC-Regular;
+            font-size: 28rpx;
+            color: #ffffff;
+
+            box-shadow: 0 4rpx 8rpx 0 rgba(56, 116, 246, 0.10);
+        }
+
+        .noShade {
+            background: #F2F2F2;
+            color: #AAAAAA;
+        }
+
+        .back {
+            background: #F2F2F2;
+            color: #666666;
+        }
+    }
+}

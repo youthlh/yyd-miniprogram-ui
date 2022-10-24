@@ -1,0 +1,34 @@
+<!-- 任务报告 completedTask -->
+<wxs src="/utils/common.wxs" module="common" />
+<view class="_reportMain" style="background-color:{{reportMainList.length?'#ffffff':'#F6F8F9'}}">
+  <picker mode="date" value="{{dateYear}}" fields="year" bindchange="bindDateYearChange">
+    <view class="_pickerYear">
+      <view class="_date">{{dateYear}}</view>
+    </view>
+  </picker>
+  <view class="_reportMainList" wx:if="{{reportMainList.length}}">
+    <view class="_list" wx:for="{{reportMainList}}" wx:key="index">
+      <view class="_listLeft">
+        <image src="./../../../assets/img/mainImgs/reportMain.png" mode="widthFix" lazy-load="true"></image>
+      </view>
+      <view class="_listRight">
+        <view class="_task">{{item.reportPeriod}}-{{item.personalUserName}}-任务报告</view>
+        <view class="_rigBottom">
+          <view class="_text">
+            <view class="_text1">{{item.corporationName?item.corporationName:"--"}}</view>
+            <view class="_text2">报告日期:{{common.formatDate(item.reportGenerationTime,"/")}}</view>
+          </view>
+          <view class="_but" bindtap="selectReportClick" data-reportpath="{{item.reportPath}}">
+            下载
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="noData">
+    <view class="_img">
+      <image src="/assets/img/noData.png" mode="widthFix" lazy-load="true"></image>
+      <view class="_text">暂无数据</view>
+    </view>
+  </view>
+</view>

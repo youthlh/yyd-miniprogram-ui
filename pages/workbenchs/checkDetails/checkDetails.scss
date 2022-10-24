@@ -1,0 +1,74 @@
+._checkDetails {
+    padding: 20rpx 40rpx;
+    background: #FFFFFF;
+
+    ._signIns {
+        display: flex;
+        height: 140rpx;
+
+        ._icon {
+            height: 100rpx;
+            line-height: 100rpx;
+            width: 100rpx;
+            text-align: center;
+            border-radius: 50%;
+            background: #669CF6;
+            margin: auto 24rpx auto 0;
+            font-size: 48rpx;
+            color: #FFFFFF;
+        }
+
+
+        ._text {
+            width: calc(100% - 130rpx);
+            border-bottom: 2rpx solid #ECECEC;
+            padding: 20rpx 40rpx 20rpx 0;
+
+            ._top {
+                height: 64rpx;
+                font-family: PingFangSC-Medium;
+                font-size: 30rpx;
+                color: #233347;
+
+                display: flex;
+                overflow: hidden;
+
+                ._name {
+                    height: 64rpx;
+                    line-height: 64rpx;
+                    width: calc(100% - 280rpx);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                ._time {
+                    height: 64rpx;
+                    line-height: 64rpx;
+                    width: 280rpx;
+                    float: right;
+                    text-align: right;
+                    opacity: 0.4;
+                    font-family: PingFangSC-Regular;
+                    font-size: 26rpx;
+                    color: #233347;
+                }
+            }
+
+            ._bot {
+                opacity: 0.4;
+                font-family: PingFangSC-Regular;
+                font-size: 26rpx;
+                color: #233347;
+
+                height: 24rpx;
+                line-height: 24rpx;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 100%;
+            }
+        }
+    }
+
+}

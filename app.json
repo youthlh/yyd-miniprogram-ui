@@ -1,0 +1,105 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/authCode/authCode",
+    "pages/taskHall/taskHall",
+    "pages/workbench/workbench",
+    "pages/main/main",
+    "pages/register/register",
+    "mp_ecard_sdk/index/index",
+    "mp_ecard_sdk/protocol/service/index",
+    "mp_ecard_sdk/protocol/privacy/index",
+    "mp_ecard_sdk/protocol/userAccredit/index",
+    "mp_ecard_sdk/protocol/eid/index"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/taskHalls",
+      "pages": [
+        "taskHallList/taskHallList",
+        "result/result",
+        "detailsQuestionnaire/detailsQuestionnaire"
+      ]
+    },
+    {
+      "root": "pages/workbenchs",
+      "pages": [
+        "workbenchList/workbenchList",
+        "newActivity/newActivity",
+        "activeList/active",
+        "directSign/directSign",
+        "invitation/invitation",
+        "personalSign/personalSign",
+        "checkDetails/checkDetails",
+        "detailsQuestionnaire/detailsQuestionnaire",
+        "alreadyTest/alreadyTest",
+        "invitationForeign/invitationForeign",
+        "detailsForeign/detailsForeign"
+      ]
+    },
+    {
+      "root": "pages/mains",
+      "pages": [
+        "questionnaire/questionnaire",
+        "beforeRealName/index",
+        "userAgent/userAgent",
+        "signature/signature",
+        "showStatusEzt/showStatusEzt",
+        "bankBinding/bankBinding",
+        "completedTask/completedTask",
+        "reportMain/reportMain",
+        "billingInfo/billingInfo",
+        "ocrsdk/pages/index/index"
+      ]
+    }
+  ],
+  "tabBar": {
+    "custom": true,
+    "color": "#A6A6A6",
+    "selectedColor": "#3874F6",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/taskHall/taskHall",
+        "text": "任务广场",
+        "iconPath": "./assets/img/taskHalloff.png",
+        "selectedIconPath": "./assets/img/taskHallon.png"
+      },
+      {
+        "pagePath": "pages/workbench/workbench",
+        "text": "做任务",
+        "iconPath": "./assets/img/workbenchoff.png",
+        "selectedIconPath": "./assets/img/workbenchon.png"
+      },
+      {
+        "pagePath": "pages/main/main",
+        "text": "我的",
+        "iconPath": "./assets/img/mainoff.png",
+        "selectedIconPath": "./assets/img/mainon.png"
+      }
+    ],
+    "position": "bottom"
+  },
+  "usingComponents": {
+    "custom-tab-bar": "/custom-tab-bar/index"
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 30
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于签到地址"
+    }
+  },
+  "requiredPrivateInfos": [
+    "chooseLocation"
+  ]
+}

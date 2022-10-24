@@ -1,0 +1,34 @@
+<!-- pages/authCode/authCode.wxml -->
+<view class="AuthCode">
+  <h1>输入验证码</h1>
+  <view class="tel">验证码已发送至 + {{tel}}</view>
+  <view class="input">
+    <view
+      class="input-item  {{value.length  ==  index||(index==0&&value.length==0)?'_line':''}}"
+      wx:for="{{6}}"
+      wx:key="index"
+      data-index="{{index}}"
+    >
+      {{value[index]}}
+    </view>
+    <input
+      class="input-password"
+      maxlength="6"
+      model:value="{{value}}"
+      bindinput="_bindinput"
+      type="number"
+      focus="{{value.length < 6}}"
+      cursor="{{value.length - 1}}"
+    ></input>
+  </view>
+  <view class="tit" wx:if="{{codeTitleShow}}">验证码错误，请重新输入</view>
+  <view class="times" bindtap="timesCount">{{times}}</view>
+  <button
+    class="_down {{btnAble?'btnAble':'btnDisable'}}"
+    bindtap="login"
+    :disabled="{{btnAble}}"
+  >
+    登录
+  </button>
+</view>
+

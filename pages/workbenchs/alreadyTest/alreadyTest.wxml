@@ -1,0 +1,19 @@
+<!-- 已答问卷  alreadyTest -->
+<wxs src="/utils/common.wxs" module="common" />
+<view class="_alreadyTest" style="background-color:{{!answeredQuestionnaires.length?'#ffffff':'#F6F8F9'}}">
+  <view wx:if="{{answeredQuestionnaires.length}}">
+    <view class="_questionnaireAlreadyTest" wx:for="{{answeredQuestionnaires}}" wx:for-index="index" wx:key="index" data-index="{{index}}">
+      <view class="_lef">
+        <view class="_top1">{{item.questionnaireName?item.questionnaireName:'--'}}</view>
+        <view class="_top2">{{common.formatDate(item.createTime,"time")}}</view>
+      </view>
+      <view class="_rig" bindtap="minute" data-resultid="{{item.resultId}}">详情</view>
+    </view>
+  </view>
+  <view wx:else class="noData">
+    <view class="_img">
+      <image src="/assets/img/noData.png" mode="widthFix" lazy-load="true"></image>
+      <view class="_text">暂无数据</view>
+    </view>
+  </view>
+</view>

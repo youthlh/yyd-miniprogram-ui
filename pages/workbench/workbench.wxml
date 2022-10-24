@@ -1,0 +1,31 @@
+<!-- 做任务    workbench -->
+<wxs src="./../../utils/common.wxs" module="common" />
+<view class="_workbench">
+  <view wx:if="{{selectTasks.length}}">
+    <view class="_selectTasks" wx:for="{{selectTasks}}" wx:key="index" data-taskid="{{item.taskId}}" data-tasktype="{{item.taskType}}" data-tasktypename="{{item.taskTypeName}}" bindtap="taskDetails">
+      <view class="_selectTasksLeft">
+        <view class="_task">{{item.taskName?item.taskName:"--"}}</view>
+        <view class="_corporationName">{{item.corporationName?item.corporationName:"--"}}</view>
+        <view class="_time">
+          <view class="_site0">
+            <view class="_taskTypeName">{{item.taskTypeName?item.taskTypeName:"--"}}</view>
+            <view class="_date">截止日期：{{common.formatDate(item.taskEndDatetime,"/")}}</view>
+          </view>
+          <view class="_site1">
+            {{item.taskRegions.length?item.taskRegions.length===1?item.taskRegions[0].regionMc:"多地区":"--"}}
+          </view>
+        </view>
+      </view>
+      <view class="_selectTasksRight">
+        <image src="/assets/img/taskHallImgs/start.png" lazy-load="true"></image>
+        <view class="_dian" wx:if="{{item.refuseActivity}}"></view>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="noData">
+    <view class="_img">
+      <image src="/assets/img/noData.png" mode="widthFix" lazy-load="true"></image>
+      <view class="_text">暂无数据</view>
+    </view>
+  </view>
+</view>

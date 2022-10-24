@@ -1,0 +1,319 @@
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+._newActivity {
+    position: relative;
+
+    form {
+        ._actionTop {
+            padding: 0 20rpx 0;
+            height: calc(100% - 120rpx);
+            background: #ffffff;
+            overflow-y: auto;
+
+            .form_item {
+                display: flex;
+                border-bottom: 2rpx solid #ECECEC;
+
+                .title {
+                    display: flex;
+                    height: 110rpx;
+                    line-height: 110rpx;
+                    width: 180rpx;
+                    font-family: PingFangSC-Regular;
+                    font-size: 32rpx;
+                    color: #111500;
+
+                    text-align: justify;
+
+                }
+
+                ._required {
+                    &::before {
+                        content: "*  ";
+                        color: #E9565C !important;
+                        width: 20rpx;
+                        font-size: 34rpx;
+                        height: 110rpx;
+                        line-height: 115rpx;
+                        display: inline-block;
+                        text-align: left;
+                        overflow: hidden;
+                    }
+                }
+
+                ._requiredNo {
+                    &::before {
+                        content: "*  ";
+                        color: transparent !important;
+                    }
+                }
+
+                .ipt,
+                picker,
+                ._picker {
+                    flex: 1;
+                    height: 110rpx;
+                    line-height: 110rpx;
+                    font-family: PingFangSC-Regular;
+                    font-size: 30rpx;
+                    color: #233347;
+
+                }
+
+                ._textarea {
+                    min-height: 30rpx;
+                    margin: 37rpx 0;
+                    line-height: 30rpx;
+                }
+
+                ._picker {
+                    overflow: hidden;
+                }
+
+                .iconfont {
+                    margin-left: 24rpx;
+                    height: 110rpx;
+                    line-height: 110rpx;
+                    font-size: 16px;
+                    width: 32rpx;
+                    color: #C2CAD4;
+                }
+
+                ._address {
+                    width: calc(100% - 48rpx);
+                    background: #F6F8F9;
+                    border-radius: 8px;
+                    min-height: 180rpx;
+                    padding: 32rpx 24rpx;
+                    line-height: 30rpx;
+                    margin-bottom: 30rpx;
+                    position: relative !important;
+
+                    .currentWordNumber {
+                        position: absolute;
+                        right: 35rpx;
+                        bottom: 16rpx;
+                        color: rgba(35, 51, 71, .3);
+                        font-size: 28rpx;
+                    }
+                }
+
+                ._hint {
+                    color: rgba(35, 51, 71, .3);
+                }
+            }
+
+            ._note {
+                display: block;
+            }
+
+        }
+
+        ._overHeight {
+            overflow-y: hidden;
+        }
+
+
+        .sub_wrap {
+            display: flex;
+            height: 120rpx;
+            padding: 0 20rpx;
+            background: #ffffff;
+
+            button {
+                margin: auto;
+                background: #F2F2F2;
+                border-radius: 8px;
+                height: 84rpx;
+                line-height: 84rpx;
+                padding: 0;
+                font-family: PingFangSC-Regular;
+                font-size: 28rpx;
+                color: rgba(35, 51, 71, .35);
+                background: #669CF6;
+                width: 100%;
+                box-shadow: 0 2px 4px 0 rgba(56, 116, 246, 0.10);
+            }
+        }
+
+        ._down {
+            button {
+                background: #669CF6;
+                color: #FFFFFF;
+            }
+        }
+    }
+
+    .hospitalIdShowHeight {
+        height: 0;
+        overflow: hidden;
+        display: block;
+    }
+
+    // 医院
+    ._hospitalLevel {
+        height: 100%;
+        width: 100%;
+        padding: 0 20rpx 0;
+
+        ._head {
+            height: 72rpx;
+            line-height: 72rpx;
+            width: 100%;
+            display: flex;
+            margin: 8rpx 0;
+
+            .iconfont {
+                height: 72rpx;
+                line-height: 72rpx;
+                width: 32rpx;
+                padding: 0 14rpx;
+                text-align: center;
+                color: #C7C7C7;
+                font-size: 32rpx;
+                background: #F4F4F4;
+                border-radius: 6rpx 0 0 6rpx;
+            }
+
+            ._hint {
+                color: rgba(35, 51, 71, .3);
+            }
+
+            input {
+                flex: 1;
+                background: #F4F4F4;
+                height: 72rpx;
+                line-height: 72rpx;
+                padding: 0 20rpx 0 0;
+                font-family: PingFangSC-Regular;
+                font-size: 28rpx;
+                color: #233347;
+
+            }
+
+            .iconfont1 {
+                width: 80rpx;
+                border-radius: 0 6rpx 6rpx 0;
+            }
+        }
+
+        ._hospitalLevelCont {
+
+            ._list {
+                height: 84rpx;
+                line-height: 84rpx;
+                font-family: PingFangSC-Regular;
+                font-size: 32rpx;
+                color: #233347;
+
+                text-align: justify;
+                border-bottom: 2rpx solid #ECECEC;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    // 多选产品名称
+    ._productName {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: rgba(0, 0, 0, 0.40);
+        z-index: 99;
+
+        ._peopleData {
+            position: absolute;
+            height: 55%;
+            overflow: hidden;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            background: #FEFFFF;
+            animation: heightauto 0.25s;
+            border-radius: 18rpx 18rpx 0 0;
+
+            .peopTop {
+                height: 96rpx;
+                line-height: 96rpx;
+                display: flex;
+                border-bottom: 2rpx solid #F2F3F4;
+
+                ._ls1 {
+                    flex: 1;
+                    text-align: center;
+                    font-family: PingFangSC-Regular;
+                    font-size: 32rpx;
+                    color: #222222;
+
+
+                    &:hover {
+                        color: #3E86E3;
+                    }
+                }
+
+                ._ls2 {
+                    border-left: 2rpx solid #F2F3F4;
+                    color: #3E86E3;
+                }
+            }
+
+            .peopBottom {
+                height: calc(100% - 96rpx);
+                width: 100%;
+                overflow-y: auto;
+
+                ._checkbox {
+                    padding: 0 32rpx;
+
+                    .checkbox {
+                        overflow: hidden;
+                        height: 94rpx;
+                        line-height: 94rpx;
+                        display: flex;
+                        font-family: PingFangSC-Regular;
+                        font-size: 32rpx;
+                        color: #111500;
+                        text-align: left;
+                        border-bottom: 2rpx solid #F2F3F4;
+
+
+                        checkbox {
+                            height: 36rpx;
+                            transform: scale(0.8);
+                            margin-top: 2rpx;
+                        }
+
+
+                        ._p {
+                            flex: 1;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            height: 94rpx;
+                            line-height: 94rpx;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes heightauto {
+    0% {
+        height: 0%;
+    }
+
+    100% {
+        height: 50%;
+    }
+}

@@ -1,0 +1,77 @@
+<!-- 问卷详情  detailsQuestionnaire -->
+<wxs src="/utils/common.wxs" module="common" />
+<view class="_detailsQuestionnaire">
+  <view wx:if="{{!stateType}}" class="_detailsQuestionnaireCont  _detailsQuestionnaireContNot">
+    <view class="_header">
+      <view class="_p1">{{ questionnaireTemplate.questionnaireName }}</view>
+      <view class="_p2">{{questionnaireTemplate.questionnaireDesc}}</view>
+    </view>
+    <view wx:if="{{questionnaireTemplate.questionnaireQuestions && questionnaireTemplate.questionnaireQuestions.length}}">
+      <view class="_subject" wx:for="{{questionnaireTemplate.questionnaireQuestions}}" wx:for-index="index" wx:key="index" data-index="{{index}}">
+        <!-- 单选题 -->
+        <view class="_singleSelection" wx:if="{{item.questionType === 1}}">
+          <view class="_title {{item.mustAnswer === 1 ? '_must' : ''}}">
+            {{ index + 1 }}.{{ item.questionTitle }}[单选题]
+          </view>
+          <radio-group class="_options" data-index="{{index}}" bindchange="groupChange" value="{{item.optionIds}}">
+            <view class="_group" wx:for="{{item.questionnaireQuestionOptions}}" wx:for-item="item1" wx:for-index="index1" wx:key="index1">
+              <label class="radio_label">
+                <radio value="{{item1.optionId}}" />
+                <view class="_text">{{item1.optionContent?item1.optionContent:'--'}}</view>
+              </label>
+              <input wx:if="{{item1.allowFill}}" model:value="{{item1.resultContent}}" bindinput="_bindinput" data-index1="{{index1}}" data-index="{{index}}" class="weui-input" />
+            </view>
+          </radio-group>
+        </view>
+        <!-- 多选题 -->
+        <view class="_multipleChoice" wx:elif="{{item.questionType === 2}}">
+          <view class="_title {{item.mustAnswer === 1 ? '_must' : ''}}">
+            {{ index + 1 }}.{{ item.questionTitle }}[多选题]
+          </view>
+          <checkbox-group class="_options" data-index="{{index}}" bindchange="groupChange1" value="{{item.optionIds}}">
+            <view class="_group" wx:for="{{item.questionnaireQuestionOptions}}" wx:for-item="item1" wx:key="index2" wx:for-index="index2">
+              <label class="checkbox_label">
+                <checkbox value="{{item1.optionId}}" />
+                <view class="_text">{{item1.optionContent?item1.optionContent:'--'}}</view>
+              </label>
+              <input wx:if="{{item1.allowFill}}" model:value="{{item1.resultContent}}" bindinput="_bindinput" data-index="{{index}}" data-index1="{{index2}}" class="weui-input" />
+            </view>
+          </checkbox-group>
+        </view>
+        <!-- 填空题 -->
+        <view class="_gapFilling" wx:elif="{{item.questionType === 3}}">
+          <view class="_title {{item.mustAnswer === 1 ? '_must' : ''}}">
+            {{ index + 1 }}.{{ item.questionTitle }}
+          </view>
+          <input wx:if="{{item.blankType === 0}}" model:value="{{item.optionContent}}" bindinput="_bindinput1" data-index="{{index}}" />
+          <picker mode="date" bindchange="bindPickerChange" data-index="{{index}}" value="{{item.dateContent}}" wx:if="{{item.blankType === 1}}">
+            <view class="picker">
+              选择日期:
+              <view class="_date1">{{item.dateContent?item.dateContent:''}}</view>
+            </view>
+          </picker>
+          <input wx:if="{{item.blankType === 2}}" type="number" model:value="{{item.optionContent}}" bindinput="_bindinput1" data-index="{{index}}" />
+          <input wx:if="{{item.blankType === 3}}" type="digit" model:value="{{item.optionContent}}" bindinput="_bindinput1" data-index="{{index}}" />
+        </view>
+      </view>
+      <view class="_bot">
+        <button class="_share" bindtap="submit">提交</button>
+      </view>
+    </view>
+    <view wx:else class="noData">
+      <view class="_img">
+        <image src="/assets/img/noData.png" mode="widthFix" lazy-load="true"></image>
+        <view class="_text">暂无数据</view>
+      </view>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="_resultData">
+      <view class="_resultsIcon">
+        <image src="/assets/img/taskHallImgs/right.png" lazy-load="true" mode="heightFix"></image>
+      </view>
+      <view class="_resultsText">提交成功</view>
+      <view class="_resultsText1">您的答案已经提交，感谢您的参与！</view>
+    </view>
+  </view>
+</view>

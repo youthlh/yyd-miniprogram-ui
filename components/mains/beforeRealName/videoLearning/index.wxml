@@ -1,0 +1,11 @@
+<view class="videoLearning">
+    <image class="videoLearning-img" show-menu-by-longpress="{{true}}" src="{{imgUrl}}" bind:tap='previewImage' mode="widthFix"></image>
+    <view class="videoLearning-des">请长按图片并识别小程序码下载视频</view>
+    <view class="videoLearning-des-mini">在实名认证之前，请先下载培训视频并学习，完成《个体合作项目合规培训》后，点击下一步完成考试。</view>
+  
+    <!-- 底部 -->
+    <view class="sub_wrap">
+        <button bind:tap="nextClick">下一步</button>
+        <button class="_but" bindtap="goBack">返回</button>
+    </view>
+</view>

@@ -1,0 +1,556 @@
+._activeData {
+    background: #F6F8F9;
+    overflow-y: hidden;
+
+    ._activeDataCont {
+        height: calc(100% - 120rpx);
+        overflow-y: auto;
+
+
+        ._titText {
+            height: 50rpx;
+            line-height: 50rpx;
+            width: 100%;
+            background: #F7DB61;
+            font-family: PingFangSC-Regular;
+            font-size: 28rpx;
+            color: rgba(0, 0, 0, 0.6);
+            text-align: left;
+            padding: 0 24rpx;
+            /* 1.先强制一行内显示文本 */
+            white-space: nowrap;
+            /* 2.超出部分隐藏 */
+            overflow: hidden;
+            /* 3.文字用省略号替代超出的部分 */
+            text-overflow: ellipsis;
+        }
+
+        ._activeDataCont1 {
+            position: relative;
+
+            &::after {
+                z-index: 99;
+                content: "";
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                background: transparent;
+            }
+        }
+
+        ._header {
+            background: #FFFFFF;
+            border-radius: 20rpx;
+            padding-top: 20rpx;
+            overflow: hidden;
+            margin-bottom: 16rpx;
+
+            ._title {
+                height: 44rpx;
+                line-height: 44rpx;
+                font-family: PingFangSC-Medium;
+                font-size: 32rpx;
+                color: #333330;
+
+                text-align: left;
+                font-weight: 500;
+                margin-bottom: 8rpx;
+                padding: 0 28rpx;
+                /* 1.先强制一行内显示文本 */
+                white-space: nowrap;
+                /* 2.超出部分隐藏 */
+                overflow: hidden;
+                /* 3.文字用省略号替代超出的部分 */
+                text-overflow: ellipsis;
+            }
+
+            ._corporationName {
+                padding: 0 28rpx;
+                display: flex;
+                height: 34rpx;
+                line-height: 34rpx;
+                font-family: PingFangSC-Regular;
+                font-size: 24rpx;
+                color: #AAAAAA;
+
+                font-weight: 400;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 24rpx;
+
+                ._name1,
+                ._name2 {
+                    width: 330rpx;
+                    /* 1.先强制一行内显示文本 */
+                    white-space: nowrap;
+                    /* 2.超出部分隐藏 */
+                    overflow: hidden;
+                    /* 3.文字用省略号替代超出的部分 */
+                    text-overflow: ellipsis;
+                }
+
+                ._name2 {
+                    width: calc(100% - 330rpx);
+                    text-align: right;
+                }
+
+            }
+
+            ._center {
+                height: 64rpx;
+                line-height: 64rpx;
+                display: flex;
+                border-top: 1rpx solid rgba(240, 240, 240, 1);
+
+                ._centerle {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: PingFangSC-Regular;
+                    font-size: 24rpx;
+                    color: #669CF6;
+
+                    font-weight: 400;
+
+                    ._icon {
+                        font-size: 24rpx;
+                        margin: auto 12rpx auto 0;
+                    }
+                }
+
+                ._centerle1 {
+                    border-left: 2rpx solid rgba(240, 240, 240, 1);
+                }
+            }
+        }
+
+        ._details {
+            padding: 28rpx 28rpx 34rpx;
+            background: #FFFFFF;
+            border-radius: 20rpx;
+            margin-bottom: 16rpx;
+            overflow: hidden;
+
+            ._title {
+                height: 40rpx;
+                line-height: 40rpx;
+                font-family: PingFangSC-Medium;
+                font-size: 28rpx;
+                color: #333333;
+
+                text-align: left;
+                font-weight: 500;
+                margin-bottom: 16rpx;
+            }
+
+
+            ._specificationTitle {
+                width: 100%;
+                line-height: 34rpx;
+                font-family: PingFangSC-Regular;
+                font-size: 24rpx;
+                color: #666666;
+
+                text-align: left;
+                font-weight: 400;
+
+                ._dataListChild {
+                    display: inline-block;
+                }
+
+                margin-bottom:12rpx;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        ._performance {
+            background: #FFFFFF;
+            border-radius: 20rpx;
+            margin-bottom: 16rpx;
+            overflow: hidden;
+            padding: 28rpx;
+
+            ._title {
+                height: 40rpx;
+                line-height: 40rpx;
+                font-family: PingFangSC-Medium;
+                font-size: 28rpx;
+                color: #333333;
+
+                text-align: left;
+                font-weight: 500;
+                margin-bottom: 28rpx;
+            }
+
+            ._questionnairetask {
+                background: #FFFFFF;
+                box-shadow: 0px 0px 10rpx 0px rgba(0, 0, 0, 0.1);
+                border-radius: 8rpx;
+                padding: 24rpx 28rpx;
+                display: flex;
+
+
+                .__questionnaireLet {
+                    width: calc(100% - 120rpx);
+                    line-height: 42rpx;
+                    font-family: PingFangSC-Medium;
+                    font-size: 30rpx;
+                    color: #000000;
+
+                    text-align: justify;
+                    font-weight: 500;
+                }
+
+                ._questionnaireTitle {
+                    margin-bottom: 12rpx;
+                }
+
+                ._p {
+                    height: 50rpx;
+                    line-height: 50rpx;
+                    font-family: PingFangSC-Semibold;
+                    color: #669CF6;
+                    font-size: 36rpx;
+
+                    text-align: justify;
+                    font-weight: 400;
+                    font-weight: 600;
+                    display: flex;
+
+                    ._p1 {
+                        margin-right: 12rpx;
+                        color: #666666;
+                        font-size: 26rpx;
+                        font-family: PingFangSC-Regular;
+                        font-weight: 400;
+
+                    }
+                }
+
+
+                .__questionnairerig {
+                    width: 110rpx;
+                    text-align: right;
+                    display: flex;
+
+                    ._details {
+                        padding: 0;
+                        margin: auto;
+                        width: 100%;
+                        height: 48rpx;
+                        line-height: 48rpx;
+                        border: 2rpx solid rgba(102, 156, 246, 1);
+                        border-radius: 6rpx;
+                        font-family: PingFangSC-Semibold;
+                        font-size: 24rpx;
+                        color: #669CF6;
+
+                        text-align: center;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            ._summary {
+                display: flex;
+                height: 36rpx;
+                line-height: 36rpx;
+                font-family: PingFangSC-Regular;
+                font-size: 26rpx;
+                color: #666666;
+
+                text-align: left;
+                font-weight: 400;
+                margin-bottom: 10rpx;
+
+                &::before {
+                    content: "*  ";
+                    color: #E9565C !important;
+                    width: 30rpx;
+                    font-size: 34rpx;
+                    height: 36rpx;
+                    line-height: 36rpx;
+                    display: inline-block;
+                    text-align: left;
+                    overflow: hidden;
+                }
+            }
+
+            .topMargin {
+                margin-top: 28rpx;
+            }
+
+            ._hint {
+                opacity: 0.3;
+            }
+
+            ._address {
+                font-family: PingFangSC-Regular;
+                font-size: 30rpx;
+                color: #233347;
+                text-align: justify;
+                background: #F6F8F9;
+                border-radius: 8px;
+                min-height: 180rpx;
+                padding: 32rpx 28rpx;
+                line-height: 30rpx;
+                position: relative !important;
+
+
+                .currentWordNumber {
+                    position: absolute;
+                    right: 35rpx;
+                    bottom: 16rpx;
+                    color: rgba(35, 51, 71, .3);
+                    font-size: 28rpx;
+                }
+            }
+
+            ._marbot {
+                margin-bottom: 28rpx;
+                display: block;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        ._activeFrom {
+            .form_item {
+                display: flex;
+                border-bottom: 2rpx solid #ECECEC;
+
+                .title {
+                    display: flex;
+                    height: 110rpx;
+                    line-height: 110rpx;
+                    width: 290rpx;
+                    font-family: PingFangSC-Regular;
+                    font-size: 32rpx;
+                    color: #111500;
+
+                    text-align: left;
+                }
+
+                ._titleLong {
+                    width: 480rpx;
+                }
+
+                ._title14 {
+                    width: 380rpx;
+                }
+
+                ._required {
+                    &::before {
+                        content: "*  ";
+                        color: #E9565C !important;
+                        width: 20rpx;
+                        font-size: 34rpx;
+                        height: 110rpx;
+                        line-height: 115rpx;
+                        display: inline-block;
+                        text-align: left;
+                        overflow: hidden;
+                    }
+                }
+
+                ._requiredNo {
+                    &::before {
+                        content: "*  ";
+                        color: transparent !important;
+                    }
+                }
+
+                .ipt,
+                picker,
+                ._picker {
+                    flex: 1;
+                    height: 110rpx;
+                    line-height: 110rpx;
+                    font-family: PingFangSC-Regular;
+                    font-size: 30rpx;
+                    color: #233347;
+
+                }
+
+                ._textarea {
+                    min-height: 30rpx;
+                    margin: 37rpx 0;
+                    line-height: 30rpx;
+                }
+
+                ._picker {
+                    overflow: hidden;
+                }
+
+                ._marbot {
+                    margin-bottom: 28rpx !important;
+                    display: block;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+
+                .iconfont {
+                    margin-left: 24rpx;
+                    height: 110rpx;
+                    line-height: 110rpx;
+                    font-size: 16px;
+                    width: 32rpx;
+                    color: #C2CAD4;
+                }
+
+                ._address {
+                    width: calc(100% - 48rpx);
+                    background: #F6F8F9;
+                    border-radius: 8px;
+                    min-height: 180rpx;
+                    padding: 32rpx 24rpx;
+                    line-height: 30rpx;
+                    margin-bottom: 30rpx;
+                    position: relative !important;
+
+                    .currentWordNumber {
+                        position: absolute;
+                        right: 35rpx;
+                        bottom: 16rpx;
+                        color: rgba(35, 51, 71, .3);
+                        font-size: 28rpx;
+                    }
+                }
+
+                ._hint {
+                    color: rgba(35, 51, 71, .3);
+                }
+            }
+
+            ._note {
+                display: block;
+            }
+        }
+
+        ._activeFromTest {
+            padding-top: 0
+        }
+
+    }
+
+    ._bot {
+        display: flex;
+        background: #ffffff;
+        height: 120rpx;
+        padding: 20rpx;
+        justify-content: center;
+        align-items: center;
+
+        ._socket {
+            margin-right: 54rpx;
+            font-family: PingFangSC-Regular;
+            font-size: 22rpx;
+            color: #666666;
+
+            text-align: center;
+
+            .icon {
+                display: block;
+                height: 32rpx;
+                line-height: 32rpx;
+                font-size: 32rpx;
+                text-align: center;
+                margin-bottom: 6rpx;
+            }
+        }
+
+        button {
+            padding: 0;
+            width: 100%;
+            height: 84rpx;
+            margin: 0;
+            line-height: 84rpx;
+            text-align: center;
+            background: #669CF6;
+            box-shadow: 0 4rpx 8rpx 0 rgba(56, 116, 246, 0.10);
+            border-radius: 16rpx;
+            font-family: PingFangSC-Regular;
+            font-size: 28rpx;
+            color: #FFFFFF;
+
+        }
+
+        ._immediately1 {
+            width: 50%;
+        }
+    }
+
+    ._hospitalLevel {
+        height: 100%;
+        width: 100%;
+        padding: 0 20rpx 0;
+
+        ._head {
+            height: 72rpx;
+            line-height: 72rpx;
+            width: 100%;
+            display: flex;
+            margin: 8rpx 0;
+
+            .iconfont {
+                height: 72rpx;
+                line-height: 72rpx;
+                width: 32rpx;
+                padding: 0 14rpx;
+                text-align: center;
+                color: #C7C7C7;
+                font-size: 32rpx;
+                background: #F4F4F4;
+                border-radius: 6rpx 0 0 6rpx;
+            }
+
+            ._hint {
+                color: rgba(35, 51, 71, .3);
+            }
+
+            input {
+                flex: 1;
+                background: #F4F4F4;
+                height: 72rpx;
+                line-height: 72rpx;
+                padding: 0 20rpx 0 0;
+                font-family: PingFangSC-Regular;
+                font-size: 28rpx;
+                color: #233347;
+
+            }
+
+            .iconfont1 {
+                width: 80rpx;
+                border-radius: 0 6rpx 6rpx 0;
+            }
+        }
+
+        ._hospitalLevelCont {
+
+            ._list {
+                height: 84rpx;
+                line-height: 84rpx;
+                font-family: PingFangSC-Regular;
+                font-size: 32rpx;
+                color: #233347;
+
+                text-align: justify;
+                border-bottom: 2rpx solid #ECECEC;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+}

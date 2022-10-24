@@ -1,0 +1,404 @@
+<!-- 新增活动 /修改活动 -->
+<wxs src="./../../../utils/common.wxs" module="common" />
+<view class="_newActivity">
+  <form catchsubmit="formSubmit" bindreset="formReset" class="{{hospitalIdShow?'hospitalIdShowHeight':''}}">
+    <view wx:if="{{common.indexOfData([1,20,21],selectTaskDetail.taskType)}}" class="_actionTop {{productNameShow?'_overHeight':''}}">
+      <view class="form_item">
+        <text class="title  _required">活动名称</text>
+        <input class="ipt" name="activityName" bindinput="_bindinput" model:value="{{activityName}}" data-type="activityName" placeholder="请输入{{selectTaskDetail.taskTypeName}}名称" placeholder-class="_hint" maxlength="50"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityName.length}}" data-type="activityName"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议主题</text>
+        <picker name="conferenceThemeId" value="{{conferenceThemeIdIndex}}" range-key="{{'conferenceThemeName'}}" range="{{conferenceThemeIds}}" bindchange="bindPickerChange" data-type="conferenceThemeIdIndex">
+          <view class="_picker">
+            {{conferenceThemeIds[conferenceThemeIdIndex].conferenceThemeName}}
+          </view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">产品名称</text>
+        <picker name="specificationId" value="{{specificationIdIndex}}" range-key="{{'specificationName'}}" range="{{specificationIds}}" bindchange="bindPickerChange" data-type="specificationIdIndex">
+          <view class="_picker">{{specificationIds[specificationIdIndex].specificationName}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议日期</text>
+        <picker mode="date" name="activityDate" value="{{activityDate}}" bindchange="bindPickerChange" data-type="activityDate" start="{{common.formatDate(startTime)}}" end="{{common.formatDate(taskEndDatetime)}}">
+          <view class="_picker">{{activityDate}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议时间</text>
+        <picker mode="time" name="activityTime" value="{{activityTime}}" bindchange="bindPickerChange" data-type="activityTime">
+          <view class="_picker">{{activityTime}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">任务地区</text>
+        <picker name="regionId" value="{{regionIdIndex}}" range-key="{{'regionMc'}}" range="{{regionIds}}" bindchange="bindPickerChange" data-type="regionIdIndex">
+          <view class="_picker">{{regionIds[regionIdIndex].regionMc}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议地点</text>
+        <textarea :fixed="true" class="ipt _textarea" auto-height name="activityLocation" bindinput="_bindinput" model:value="{{activityLocation}}" data-type="activityLocation" placeholder="请输入会议地点" placeholder-class="_hint" maxlength="50" />
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityLocation.length}}" data-type="activityLocation"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">医院名称</text>
+        <input class="ipt" name="hospitalId" disabled bindinput="_bindinput" bindtap="_bindhospitalId" model:value="{{hospitalIdsSelect.hospitalName}}" data-type="activityName" placeholder="请选择医院名称" placeholder-class="_hint"></input>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">医院等级</text>
+        <picker name="gradeId" value="{{gradeIdIndex}}" range-key="{{'gradeName'}}" range="{{gradeIds}}" bindchange="bindPickerChange" data-type="gradeIdIndex">
+          <view class="_picker">{{gradeIds[gradeIdIndex].gradeName}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">科室</text>
+        <input class="ipt" name="departmentName" bindinput="_bindinput" model:value="{{departmentName}}" data-type="departmentName" placeholder="请输入科室名称" placeholder-class="_hint" maxlength="30"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{departmentName.length}}" data-type="departmentName"></view>
+      </view>
+      <view class="form_item _note">
+        <text class="title  _requiredNo">备注</text>
+        <textarea :fixed="true" class="ipt _address" auto-height name="notes" bindinput="_bindinput" model:value="{{notes}}" data-type="notes" placeholder="如有科室层级等信息请在备注中说明" placeholder-class="_hint" maxlength="85">
+          <text class="currentWordNumber">{{85 - notes.length}}/85</text>
+        </textarea>
+      </view>
+    </view>
+    <view wx:if="{{common.indexOfData([22],selectTaskDetail.taskType)}}" class="_actionTop {{productNameShow?'_overHeight':''}}">
+      <view class="form_item">
+        <text class="title  _required">活动名称</text>
+        <input class="ipt" name="activityName" bindinput="_bindinput" model:value="{{activityName}}" data-type="activityName" placeholder="请输入{{selectTaskDetail.taskTypeName}}名称" placeholder-class="_hint" maxlength="50"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityName.length}}" data-type="activityName"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议主题</text>
+        <picker name="conferenceThemeId" value="{{conferenceThemeIdIndex}}" range-key="{{'conferenceThemeName'}}" range="{{conferenceThemeIds}}" bindchange="bindPickerChange" data-type="conferenceThemeIdIndex">
+          <view class="_picker">
+            {{conferenceThemeIds[conferenceThemeIdIndex].conferenceThemeName}}
+          </view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">产品名称</text>
+        <picker name="specificationId" value="{{specificationIdIndex}}" range-key="{{'specificationName'}}" range="{{specificationIds}}" bindchange="bindPickerChange" data-type="specificationIdIndex">
+          <view class="_picker">{{specificationIds[specificationIdIndex].specificationName}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议日期</text>
+        <picker mode="date" name="activityDate" value="{{activityDate}}" bindchange="bindPickerChange" data-type="activityDate" start="{{common.formatDate(startTime)}}" end="{{common.formatDate(taskEndDatetime)}}">
+          <view class="_picker">{{activityDate}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议时间</text>
+        <picker mode="time" name="activityTime" value="{{activityTime}}" bindchange="bindPickerChange" data-type="activityTime">
+          <view class="_picker">{{activityTime}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">任务地区</text>
+        <picker name="regionId" value="{{regionIdIndex}}" range-key="{{'regionMc'}}" range="{{regionIds}}" bindchange="bindPickerChange" data-type="regionIdIndex">
+          <view class="_picker">{{regionIds[regionIdIndex].regionMc}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议地点</text>
+        <textarea :fixed="true" class="ipt _textarea" auto-height name="activityLocation" bindinput="_bindinput" model:value="{{activityLocation}}" data-type="activityLocation" placeholder="请输入会议地点" placeholder-class="_hint" maxlength="50" />
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityLocation.length}}" data-type="activityLocation"></view>
+      </view>
+      <view class="form_item _note">
+        <text class="title  _requiredNo">备注</text>
+        <textarea :fixed="true" class="ipt _address" auto-height name="notes" bindinput="_bindinput" model:value="{{notes}}" data-type="notes" placeholder="如有科室层级等信息请在备注中说明" placeholder-class="_hint" maxlength="85">
+          <text class="currentWordNumber">{{85 - notes.length}}/85</text>
+        </textarea>
+      </view>
+    </view>
+    <view wx:if="{{common.indexOfData([23],selectTaskDetail.taskType)}}" class="_actionTop {{productNameShow?'_overHeight':''}}">
+      <view class="form_item">
+        <text class="title  _required">活动名称</text>
+        <input class="ipt" name="activityName" bindinput="_bindinput" model:value="{{activityName}}" data-type="activityName" placeholder="请输入{{selectTaskDetail.taskTypeName}}名称" placeholder-class="_hint" maxlength="50"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityName.length}}" data-type="activityName"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议主题</text>
+        <picker name="conferenceThemeId" value="{{conferenceThemeIdIndex}}" range-key="{{'conferenceThemeName'}}" range="{{conferenceThemeIds}}" bindchange="bindPickerChange" data-type="conferenceThemeIdIndex">
+          <view class="_picker">
+            {{conferenceThemeIds[conferenceThemeIdIndex].conferenceThemeName}}
+          </view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">产品名称</text>
+        <picker name="specificationId" value="{{specificationIdIndex}}" range-key="{{'specificationName'}}" range="{{specificationIds}}" bindchange="bindPickerChange" data-type="specificationIdIndex">
+          <view class="_picker">{{specificationIds[specificationIdIndex].specificationName}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议日期</text>
+        <picker mode="date" name="activityDate" value="{{activityDate}}" bindchange="bindPickerChange" data-type="activityDate" start="{{common.formatDate(startTime)}}" end="{{common.formatDate(taskEndDatetime)}}">
+          <view class="_picker">{{activityDate}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议时间</text>
+        <picker mode="time" name="activityTime" value="{{activityTime}}" bindchange="bindPickerChange" data-type="activityTime">
+          <view class="_picker">{{activityTime}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">任务地区</text>
+        <picker name="regionId" value="{{regionIdIndex}}" range-key="{{'regionMc'}}" range="{{regionIds}}" bindchange="bindPickerChange" data-type="regionIdIndex">
+          <view class="_picker">{{regionIds[regionIdIndex].regionMc}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议链接</text>
+        <input class="ipt" name="conferenceLink" bindinput="_bindinput" model:value="{{conferenceLink}}" data-type="conferenceLink" placeholder="请输入会议链接" placeholder-class="_hint" maxlength="50"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{conferenceLink.length}}" data-type="conferenceLink"></view>
+      </view>
+      <view class="form_item _note">
+        <text class="title  _requiredNo">备注</text>
+        <textarea :fixed="true" class="ipt _address" auto-height name="notes" bindinput="_bindinput" model:value="{{notes}}" data-type="notes" placeholder="如有科室层级等信息请在备注中说明" placeholder-class="_hint" maxlength="85">
+          <text class="currentWordNumber">{{85 - notes.length}}/85</text>
+        </textarea>
+      </view>
+    </view>
+    <view wx:if="{{common.indexOfData([6,7],selectTaskDetail.taskType)}}" class="_actionTop {{productNameShow?'_overHeight':''}}">
+      <view class="form_item">
+        <text class="title  _required">活动名称</text>
+        <input class="ipt" name="activityName" bindinput="_bindinput" model:value="{{activityName}}" data-type="activityName" placeholder="请输入{{selectTaskDetail.taskTypeName}}名称" placeholder-class="_hint" maxlength="50"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityName.length}}" data-type="activityName"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">产品名称</text>
+        <!-- <picker name="specificationId" value="{{specificationIdIndex}}" range-key="{{'specificationName'}}" range="{{specificationIds}}" bindchange="bindPickerChange" data-type="specificationIdIndex">
+          <view class="_picker">{{specificationIds[specificationIdIndex].specificationName}}</view>
+        </picker> -->
+        <input class="ipt" disabled name="specificationId" bindtap="specificationClick" model:value="{{common.forMap(specificationIdsList,'specificationName','checked')}}" placeholder="请选择产品名称" placeholder-class="_hint"></input>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">任务地区</text>
+        <picker name="regionId" value="{{regionIdIndex}}" range-key="{{'regionMc'}}" range="{{regionIds}}" bindchange="bindPickerChange" data-type="regionIdIndex">
+          <view class="_picker">{{regionIds[regionIdIndex].regionMc}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">会议地点</text>
+        <textarea :fixed="true" class="ipt _textarea" auto-height name="activityLocation" bindinput="_bindinput" model:value="{{activityLocation}}" data-type="activityLocation" placeholder="请输入会议地点" placeholder-class="_hint" maxlength="50" />
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityLocation.length}}" data-type="activityLocation"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">医院名称</text>
+        <input class="ipt" name="hospitalId" disabled bindinput="_bindinput" bindtap="_bindhospitalId" model:value="{{hospitalIdsSelect.hospitalName}}" data-type="activityName" placeholder="请选择医院名称" placeholder-class="_hint"></input>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">医院等级</text>
+        <picker name="gradeId" value="{{gradeIdIndex}}" range-key="{{'gradeName'}}" range="{{gradeIds}}" bindchange="bindPickerChange" data-type="gradeIdIndex">
+          <view class="_picker">{{gradeIds[gradeIdIndex].gradeName}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">医院类别</text>
+        <picker name="hospitalClassification" value="{{hospitalClassificationIndex}}" range-key="{{'label'}}" range="{{hospitalClassifications}}" bindchange="bindPickerChange" data-type="hospitalClassificationIndex">
+          <view class="_picker">
+            {{hospitalClassifications[hospitalClassificationIndex].label}}
+          </view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">科室</text>
+        <input class="ipt" name="departmentName" bindinput="_bindinput" model:value="{{departmentName}}" data-type="departmentName" placeholder="请输入科室名称" placeholder-class="_hint" maxlength="30"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{departmentName.length}}" data-type="departmentName"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">手术类别</text>
+        <input class="ipt" name="operationClassification" bindinput="_bindinput" model:value="{{operationClassification}}" data-type="operationClassification" placeholder="请输入手术类别" placeholder-class="_hint" maxlength="30"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{operationClassification.length}}" data-type="operationClassification"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">服务类别</text>
+        <picker name="serviceClassificationId" value="{{serviceClassificationIdIndex}}" range-key="{{'label'}}" range="{{serviceClassificationIds[selectTaskDetail.taskType]}}" bindchange="bindPickerChange" data-type="serviceClassificationIdIndex">
+          <view class="_picker">
+            {{serviceClassificationIds[selectTaskDetail.taskType][serviceClassificationIdIndex].label}}
+          </view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item _note">
+        <text class="title  _requiredNo">备注</text>
+        <textarea :fixed="true" class="ipt _address" auto-height name="notes" bindinput="_bindinput" model:value="{{notes}}" data-type="notes" placeholder="如有科室层级等信息请在备注中说明" placeholder-class="_hint" maxlength="85">
+          <text class="currentWordNumber">{{85 - notes.length}}/85</text>
+        </textarea>
+      </view>
+    </view>
+    <view wx:if="{{common.indexOfData([8,9,10],selectTaskDetail.taskType)}}" class="_actionTop {{productNameShow?'_overHeight':''}}">
+      <view class="form_item">
+        <text class="title  _required">活动名称</text>
+        <input class="ipt" name="activityName" bindinput="_bindinput" model:value="{{activityName}}" data-type="activityName" placeholder="请输入{{selectTaskDetail.taskTypeName}}名称" placeholder-class="_hint" maxlength="50"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityName.length}}" data-type="activityName"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">产品名称</text>
+        <picker name="specificationId" value="{{specificationIdIndex}}" range-key="{{'specificationName'}}" range="{{specificationIds}}" bindchange="bindPickerChange" data-type="specificationIdIndex">
+          <view class="_picker">{{specificationIds[specificationIdIndex].specificationName}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">任务地区</text>
+        <picker name="regionId" value="{{regionIdIndex}}" range-key="{{'regionMc'}}" range="{{regionIds}}" bindchange="bindPickerChange" data-type="regionIdIndex">
+          <view class="_picker">{{regionIds[regionIdIndex].regionMc}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item" wx:if="{{selectTaskDetail.taskType===9}}">
+        <text class="title  _required">医院名称</text>
+        <input class="ipt" name="hospitalId" disabled bindinput="_bindinput" bindtap="_bindhospitalId" model:value="{{hospitalIdsSelect.hospitalName}}" data-type="activityName" placeholder="请选择医院名称" placeholder-class="_hint"></input>
+        <em class="iconfont icon-right"></em>
+      </view>
+    </view>
+    <view wx:if="{{common.indexOfData([11,12,13,14,15],selectTaskDetail.taskType)}}" class="_actionTop {{productNameShow?'_overHeight':''}}">
+      <view class="form_item">
+        <text class="title  _required">活动名称</text>
+        <input class="ipt" name="activityName" bindinput="_bindinput" model:value="{{activityName}}" data-type="activityName" placeholder="请输入{{selectTaskDetail.taskTypeName}}名称" placeholder-class="_hint" maxlength="50"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityName.length}}" data-type="activityName"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">产品名称</text>
+        <picker name="specificationId" value="{{specificationIdIndex}}" range-key="{{'specificationName'}}" range="{{specificationIds}}" bindchange="bindPickerChange" data-type="specificationIdIndex">
+          <view class="_picker">{{specificationIds[specificationIdIndex].specificationName}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">任务地区</text>
+        <picker name="regionId" value="{{regionIdIndex}}" range-key="{{'regionMc'}}" range="{{regionIds}}" bindchange="bindPickerChange" data-type="regionIdIndex">
+          <view class="_picker">{{regionIds[regionIdIndex].regionMc}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+    </view>
+    <view wx:if="{{common.indexOfData([16],selectTaskDetail.taskType)}}" class="_actionTop {{productNameShow?'_overHeight':''}}">
+      <view class="form_item">
+        <text class="title  _required">活动名称</text>
+        <input class="ipt" name="activityName" bindinput="_bindinput" model:value="{{activityName}}" data-type="activityName" placeholder="请输入{{selectTaskDetail.taskTypeName}}名称" placeholder-class="_hint" maxlength="50"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityName.length}}" data-type="activityName"></view>
+      </view>
+    </view>
+    <view wx:if="{{common.indexOfData([2,3,4,5,17,24,25],selectTaskDetail.taskType)}}" class="_actionTop {{productNameShow?'_overHeight':''}}">
+      <view class="form_item _test">
+        <text class="title  _required">活动名称</text>
+        <input class="ipt" name="activityName" bindinput="_bindinput" model:value="{{activityName}}" data-type="activityName" placeholder="请输入{{selectTaskDetail.taskTypeName}}名称" placeholder-class="_hint" maxlength="50"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityName.length}}" data-type="activityName"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">产品名称</text>
+        <picker name="specificationId" value="{{specificationIdIndex}}" range-key="{{'specificationName'}}" range="{{specificationIds}}" bindchange="bindPickerChange" data-type="specificationIdIndex">
+          <view class="_picker">{{specificationIds[specificationIdIndex].specificationName}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">任务地区</text>
+        <picker name="regionId" value="{{regionIdIndex}}" range-key="{{'regionMc'}}" range="{{regionIds}}" bindchange="bindPickerChange" data-type="regionIdIndex">
+          <view class="_picker">{{regionIds[regionIdIndex].regionMc}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">问卷名称</text>
+        <picker name="questionnaireId" value="{{questionnaireIdIndex}}" range-key="{{'questionnaireName'}}" range="{{questionnaireIds}}" bindchange="bindPickerChange" data-type="questionnaireIdIndex">
+          <view class="_picker">{{questionnaireIds[questionnaireIdIndex].questionnaireName}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+    </view>
+    <view wx:if="{{common.indexOfData([18,19],selectTaskDetail.taskType)}}" class="_actionTop {{productNameShow?'_overHeight':''}}">
+      <view class="form_item _test">
+        <text class="title  _required">活动名称</text>
+        <input class="ipt" name="activityName" bindinput="_bindinput" model:value="{{activityName}}" data-type="activityName" placeholder="请输入{{selectTaskDetail.taskTypeName}}名称" placeholder-class="_hint" maxlength="50"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{activityName.length}}" data-type="activityName"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">产品名称</text>
+        <picker name="specificationId" value="{{specificationIdIndex}}" range-key="{{'specificationName'}}" range="{{specificationIds}}" bindchange="bindPickerChange" data-type="specificationIdIndex">
+          <view class="_picker">{{specificationIds[specificationIdIndex].specificationName}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">任务地区</text>
+        <picker name="regionId" value="{{regionIdIndex}}" range-key="{{'regionMc'}}" range="{{regionIds}}" bindchange="bindPickerChange" data-type="regionIdIndex">
+          <view class="_picker">{{regionIds[regionIdIndex].regionMc}}</view>
+        </picker>
+        <em class="iconfont icon-right"></em>
+      </view>
+    </view>
+    <!-- 底部 -->
+    <view class="sub_wrap  _down">
+      <button formType="submit">{{activeTypeKey?'修改':'确定'}}</button>
+    </view>
+  </form>
+  <view class="_hospitalLevel" wx:if="{{hospitalIdShow}}">
+    <view class="_head">
+      <em class="iconfont  icon-search" bindtap="bindconfirm"></em>
+      <input bindinput="_bindinput" confirm-type="search" model:value="{{hospitalLevelText}}" placeholder="请输入医院名称" placeholder-class="_hint" bindconfirm="bindconfirm"></input>
+      <view class="iconfont1 iconfont  icon-close" bindtap="delIpt1" wx:if="{{hospitalLevelText.length}}" data-type="hospitalLevelText"></view>
+    </view>
+    <scroll-view scroll-y='true' style="height:calc(100% -  90rpx)" bindscrolltolower='lower' wx:if="{{hospitalIds.length}}">
+      <view class="_hospitalLevelCont">
+        <view wx:for="{{hospitalIds}}" wx:for-index="index" wx:key="index" data-index="{{index}}" class="_list" bindtap="hospitalIdsList" data-hospitalid="{{item.hospitalId}}" data-hospitalname="{{item.hospitalName}}">
+          {{item.hospitalName}}
+        </view>
+      </view>
+    </scroll-view>
+    <view wx:else class="noData">
+      <view class="_img">
+        <image src="/assets/img/noData.png" mode="widthFix" lazy-load="true"></image>
+        <view class="_text">暂无数据</view>
+      </view>
+    </view>
+  </view>
+  <view class="_productName" wx:if="{{productNameShow}}">
+    <view class="_peopleData">
+      <view class="peopTop">
+        <view class="_ls1" bindtap="productNameShowFalse">取消</view>
+        <view class="_ls1  _ls2" bindtap="productNameShowSure">确定</view>
+      </view>
+      <view class="peopBottom">
+        <checkbox-group bindchange="checkboxChange" class="_checkbox">
+          <label class="checkbox" wx:for="{{specificationIds}}" wx:key="index">
+            <checkbox value="{{item.specificationId}}" data-index="{{index}}" checked="{{item.checked}}" />
+            <p class="_p">{{item.specificationName}}</p>
+          </label>
+        </checkbox-group>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,182 @@
+
+/**
+ * @param {*} date  时间戳
+ * @param {*} type 连接的方式 text(yyyy年mm月dd日) date(yyyy年mm月dd日 hh:mm:ss) 其他(yyyy{{type}}mm{{type}}dd)默认"-"
+ * @returns 
+ */
+var formatDate = function (date, type = "-") {
+    var fixz = function (num) {
+        if (num < 10) {
+            return "0" + num
+        }
+        return num
+    }
+    if (date) {
+        var date = getDate(date); //返回当前时间对象
+        var year = date.getFullYear()
+        var month = fixz(date.getMonth() + 1)
+        var day = fixz(date.getDate())
+        var hour = fixz(date.getHours())
+        var minute = fixz(date.getMinutes())
+        var second = fixz(date.getSeconds())
+
+        switch (type) {
+            case "text":
+                return year + "年" + month + "月" + day + "日";
+            case "date":
+                return year + "年" + month + "月" + day + "日" + " " + hour + ":" + minute + ":" + second;
+            case "time":
+                return year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
+            default:
+                return year + type + month + type + day;
+        }
+    } else {
+        return "----"
+    }
+
+}
+
+/**
+ * 
+ * @param idCard 身份证验证
+ * @returns
+ */
+var idCardFormat = function (idCard, num = 10) {
+    var reg = getRegExp('^[1-9]\d{5}(?:18|19|20)\d{2}(?:0[1-9]|10|11|12)(?:0[1-9]|[1-2]\d|30|31)\d{3}[\dXx]$'); // wxs 正则表达式两边不用 定界符
+    if (idCard.length > num && idCard.length !== 0 && !reg.test(idCard)) {
+        return "请输入正确的身份证号码"
+    }
+}
+/**
+ * 
+ * @param iphone 手机号码验证
+ * @returns
+ */
+var iphoneFormat = function (iphone, num = 8) {
+    var reg = getRegExp('^(?:(?:\+|00)86)?1[3-9]\d{9}$'); // wxs 正则表达式两边不用 定界符
+    if (iphone.length > num && iphone.length !== 0 && !reg.test(iphone)) {
+        return "请输入正确的手机号码"
+    }
+}
+/**
+ * 
+ * @param iphone 银行卡号验证
+ * @returns
+ */
+var cardNumbersFormat = function (idCard) {
+    var reg = getRegExp('^[1-9]\d{9,29}$'); // wxs 正则表达式两边不用 定界符
+    if (idCard.length > 15 && idCard.length !== 0 && !reg.test(idCard)) {
+        return "请输入正确的银行卡号"
+    }
+}
+/**
+ * 处理字符串为****格式，中间显示四个*号
+ * str 需要处理的字符串
+ * startLength 前面显示的字符串长度
+ * endLength 后面显示的字符串长度
+ */
+var stringSub = function (str, startLength, endLength) {
+    if (str.length == 0 || str == undefined) {
+        return "";
+    }
+    var length = str.length;
+    if (length >= startLength + endLength) {
+        return str.substring(0, startLength) + "****" + str.substring(length - endLength, length);
+    } else {
+        return str;
+    }
+}
+
+/**
+ * 格式化银行卡号
+ * @param data 
+ * @returns 
+ */
+var cardFormatting = function (data) {
+    var cardReplace1 = getRegExp('/\s', 'g');
+    var cardReplace2 = getRegExp('(\d{4})(?=\d)', 'g');
+    return data.replace(cardReplace1, '').replace(cardReplace2, '$1 ')
+}
+
+/**
+ * 格式化手机号码
+ * @param e 
+ * @returns 
+ */
+var phoneFormatting = function (e) {
+    var phoneReplace = getRegExp('\s*', 'g');
+    if (e) {
+        var _phone = e.replace(phoneReplace, '')
+        var result = []
+        for (var i = 0; i < _phone.length; i++) {
+            if (i == 3 || i == 7) {
+                result.push(' ' + _phone.charAt(i))
+            } else {
+                result.push(_phone.charAt(i))
+            }
+        }
+        _phone = result.join('')
+        return _phone
+    }
+}
+/**
+ * 格式化金钱
+ * @param e 
+ * @returns 
+ */
+var moneyFormatting = function (e, type = "￥") {
+    console.log(e)
+    var moneyReplace = getRegExp('\B(?=(\d{3})+(?!\d))', 'g');
+    if (e) {
+        return type + e.toString().replace(moneyReplace, ',')
+    } else {
+        return type + '--'
+    }
+}
+/**
+ * 数组截取
+ * @param e 
+ * @returns 
+ */
+var arraySlice = function (data, start = 0, end = 0) {
+    return data.slice(start, end)
+}
+
+/**
+ * @param e 
+ * @returns 
+ */
+var indexOfData = function (item, item1) {
+    return item.indexOf(item1) !== -1 ? true : false
+}
+/**
+ * @param e 
+ * 6,7  活动专用
+ * @returns 
+ */
+var forMap = function (data, key, checked) {
+    if (!data.length) {
+        return ""
+    }
+    var texts = [];
+    for (var i = 0; i < data.length; i++) {
+        if (data[i][checked]) {
+            texts.push(data[i][key])
+        }
+    }
+    return texts.join(',')
+}
+
+module.exports = {
+    formatDate: formatDate,
+    stringSub: stringSub,
+    idCardFormat: idCardFormat,
+    cardNumbersFormat: cardNumbersFormat,
+    iphoneFormat: iphoneFormat,
+    cardFormatting: cardFormatting,
+    phoneFormatting: phoneFormatting,
+    moneyFormatting: moneyFormatting,
+    indexOfData: indexOfData,
+    arraySlice: arraySlice,
+    forMap: forMap,
+}

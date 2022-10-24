@@ -1,0 +1,53 @@
+<!-- 邀请函=>到签到  invitationForeign -->
+<wxs src="/utils/common.wxs" module="common" />
+<view class="_invitationForeign">
+  <view class="_center" wx:if="{{showPage=='1'}}">
+    <view class="_log1">
+      <image src="./../../../assets/img/logo.png" mode="widthFix" lazy-load="true"></image>
+    </view>
+    <view class="_name0">邀请函</view>
+    <view class="_name1">INVITATION</view>
+    <view class="_name2">{{taskActivities.activityName?taskActivities.activityName:'--'}}</view>
+    <view class="_name3">会议主题</view>
+    <view class="_name4">
+      {{taskActivities.conferenceThemeName?taskActivities.conferenceThemeName:'--'}}
+    </view>
+    <view class="_name3">会议时间</view>
+    <view class="_name4">
+      {{common.formatDate((taskActivities.activityDate + taskActivities.activityTime + 28800000),"time")}}
+    </view>
+    <view class="_name3">会议地点</view>
+    <view class="_name4">
+      {{taskActivities.activityLocation?taskActivities.activityLocation:'--'}}
+    </view>
+    <button class="_share" bindtap="signIn">签到</button>
+  </view>
+  <view wx:elif="{{showPage=='2'}}">
+    <form catchsubmit="formSubmit" bindreset="formReset">
+      <view class="form_item">
+        <text class="title  _required">姓名</text>
+        <input class="ipt" name="personalName" bindinput="_bindinput" model:value="{{personalName}}" data-type="personalName" placeholder="请输入姓名" placeholder-class="_hint" maxlength="30"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{personalName.length}}" data-type="personalName"></view>
+      </view>
+      <view class="form_item">
+        <text class="title  _required">地址</text>
+        <input class="ipt" name="place" bindinput="_bindinput" model:value="{{place}}" data-type="place" placeholder="请输入地址" placeholder-class="_hint" maxlength="18"></input>
+        <view class="iconfont  icon-close" bindtap="delIpt" wx:if="{{place.length}}" data-type="place"></view>
+        <view class="iconfont  icon-location" bindtap="chooseLoc" data-type="place"></view>
+      </view>
+      <!-- 底部 -->
+      <view class="sub_wrap {{personalName.length&&place.length?'_down':''}}">
+        <button formType="submit">确定</button>
+      </view>
+    </form>
+  </view>
+  <view wx:elif="{{showPage=='3'}}">
+    <view class="_result">
+      <view class="_resultsIcon">
+        <image src="/assets/img/taskHallImgs/right.png" lazy-load="true" mode="heightFix"></image>
+      </view>
+      <view class="_resultsText">签到成功</view>
+      <view class="_resultsText1">签到成功，感谢您的参与！</view>
+    </view>
+  </view>
+</view>

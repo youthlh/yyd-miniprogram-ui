@@ -1,0 +1,20 @@
+<view class="downNorm">
+    <view class="downNorm-header">
+        <image class="downNorm-header-success-img" src="./img/circle-success.png" mode="widthFix"></image>
+        <view class="downNorm-header-txt">恭喜您，您已完成合规培训及考核，以下是您的合规考试通过证书。</view>
+    </view>
+    <view class="save-box">
+           <image class="save-img" mode="widthFix"  bind:tap='previewImage' wx:if="{{imgUrl}}" src="{{imgUrl}}"></image>
+    </view>
+    
+    <view class="down-btn-con">
+        <view class="down-btn" bind:tap="downNorm">
+            下载保存证书 
+        </view>
+    </view>
+ 
+    <!-- 底部 -->
+    <view class="sub_wrap">
+        <button  bindtap="goBack">返回</button>
+    </view>
+</view>

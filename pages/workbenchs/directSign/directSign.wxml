@@ -1,0 +1,26 @@
+<!-- 直接签到详情 23 -->
+<wxs src="/utils/common.wxs" module="common" />
+<view class="_directSign">
+  <view class="_signCont {{readOnly?'':'_signCont1'}}">
+    <view wx:if="{{taskActivitySignIns.length}}">
+      <view class="_signIns" wx:for="{{taskActivitySignIns}}" wx:for-index="index" wx:key="index" data-index="{{index}}">
+        <view class="_icon iconfont  icon-brush_fill"></view>
+        <view class="_text">
+          <view class="_top">
+            <view class="_name">{{item.personalName?item.personalName:'--'}}</view>
+          </view>
+          <view class="_bot">{{common.formatDate(item.createTime,"time")}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="noData">
+      <view class="_img">
+        <image src="/assets/img/noData.png" mode="widthFix" lazy-load="true"></image>
+        <view class="_text">暂无数据</view>
+      </view>
+    </view>
+  </view>
+  <view class="_but" wx:if="{{readOnly}}">
+    <view class="_button" bindtap="addSign">添加</view>
+  </view>
+</view>

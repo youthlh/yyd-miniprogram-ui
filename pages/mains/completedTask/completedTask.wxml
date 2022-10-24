@@ -1,0 +1,37 @@
+<!-- 已完成任务    completedTask -->
+<wxs src="/utils/common.wxs" module="common" />
+<view class="_completedTask">
+  <view wx:if="{{selectFinishedTask.length}}">
+    <view class="_selectFinishedTask" wx:for="{{selectFinishedTask}}" wx:key="index">
+      <view class="_taskLeft">
+        <image src="./../../../assets/img/mainImgs/reportMain.png" lazy-load="true"></image>
+      </view>
+      <view class="_taskRight">
+        <view class="_task">{{item.taskName?item.taskName:"--"}}</view>
+        <view class="_taskTypeorMoney">
+          <view class="_taskTypeName">{{item.taskTypeName?item.taskTypeName:"--"}}</view>
+          <view class="_taskMoney">
+            {{item.settlementAmount?common.moneyFormatting(item.settlementAmount):'¥ 0'}}
+          </view>
+        </view>
+        <view class="_taskBot">
+          <view class="_botLeft">
+            <view class="_taskName">{{item.corporationName?item.corporationName:"--"}}</view>
+            <view class="_time">截止日期：{{common.formatDate(item.taskEndDatetime,"/")}}</view>
+          </view>
+          <view class="_botRight">
+            <view class="_but" data-taskid="{{item.taskId}}" data-tasktype="{{item.taskType}}" data-tasktypename="{{item.taskTypeName}}" bindtap="selectTaskClick">
+              详情
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="noData">
+    <view class="_img">
+      <image src="/assets/img/noData.png" mode="widthFix" lazy-load="true"></image>
+      <view class="_text">暂无数据</view>
+    </view>
+  </view>
+</view>

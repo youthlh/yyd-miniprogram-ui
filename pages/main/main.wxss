@@ -1,0 +1,230 @@
+._main {
+  background: #F6F8F9;
+}
+
+._main ._header {
+  width: 100%;
+  height: 264rpx;
+  background: #ffffff;
+  padding: 56rpx 40rpx;
+  box-sizing: border-box;
+  display: flex;
+}
+
+._main ._header ._imgBut {
+  padding: 0;
+  margin: 0;
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 40rpx;
+  border: 4rpx solid #ffffff;
+}
+
+._main ._header ._imgBut ._image {
+  width: 100%;
+  height: 100%;
+}
+
+._main ._header ._information {
+  width: calc(100% - 168rpx);
+  padding: 20rpx 0 0;
+}
+
+._main ._header ._information ._name {
+  width: 100%;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 40rpx;
+  color: #111111;
+  text-align: left;
+  font-weight: 500;
+  display: flex;
+}
+
+._main ._header ._information ._name ._nam {
+  max-width: calc(100% - 260rpx);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 20rpx;
+}
+
+._main ._header ._information ._name ._butt {
+  padding: 0 12px;
+  height: 36rpx;
+  line-height: 36rpx;
+  background: #CCCCCC;
+  border-radius: 6rpx;
+  overflow: hidden;
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFFFFF;
+  text-align: center;
+  font-weight: 400;
+  margin-right: 12rpx;
+}
+
+._main ._header ._information ._name ._butt:last-child {
+  margin-right: 0;
+}
+
+._main ._header ._information ._name ._butt1 {
+  background: #5BC29D;
+}
+
+._main ._header ._information ._photo {
+  margin-top: 26rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 32rpx;
+  color: #666666;
+  text-align: left;
+  font-weight: 400;
+}
+
+._main ._essentialMain {
+  margin: 16rpx 20rpx;
+  height: 216rpx;
+  background: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 26rpx 30rpx;
+}
+
+._main ._essentialMain ._title {
+  height: 36rpx;
+  line-height: 36rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #333333;
+  text-align: left;
+  font-weight: 500;
+  margin-bottom: 24rpx;
+}
+
+._main ._essentialMain ._kuang {
+  display: flex;
+}
+
+._main ._essentialMain ._kuang ._sm {
+  border-right: 2rpx solid #f1f1f1;
+}
+
+._main ._essentialMain ._kuang ._sm,
+._main ._essentialMain ._kuang ._bk {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+}
+
+._main ._essentialMain ._kuang ._sm image,
+._main ._essentialMain ._kuang ._bk image {
+  height: 52rpx;
+  width: 52rpx;
+}
+
+._main ._essentialMain ._kuang ._sm ._p,
+._main ._essentialMain ._kuang ._bk ._p {
+  margin-top: 16rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #333333;
+  text-align: center;
+  font-weight: 400;
+}
+
+._main ._list {
+  margin: 16rpx 20rpx;
+  background: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+._main ._list ._listChild {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  align-items: center;
+  display: flex;
+  padding: 0 28rpx 0 32rpx;
+  box-sizing: border-box;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+._main ._list ._listChild:last-child {
+  border-color: transparent;
+}
+
+._main ._list ._listChild ._titleIcon {
+  height: 44rpx;
+  line-height: 44rpx;
+  width: 44rpx;
+  font-size: 44rpx;
+  margin: auto 26rpx auto 0;
+  text-align: center;
+}
+
+._main ._list ._listChild ._listText {
+  width: calc(100% - 70rpx);
+  box-sizing: border-box;
+  font-family: PingFangSC-Regular;
+  font-size: 30rpx;
+  color: #333333;
+  font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+}
+
+._main ._list ._listChild ._listText .iconfont {
+  height: 32rpx;
+  line-height: 32rpx;
+  width: 32rpx;
+  text-align: center;
+  font-size: 32rpx;
+  margin: auto 0 auto 20rpx;
+  color: #ACADAE;
+}
+
+._main ._logOut {
+  height: 90rpx;
+  line-height: 90rpx;
+  padding: 0;
+  background: #669CF6;
+  box-shadow: 0px 4rpx 8rpx 0px rgba(56, 116, 246, 0.1);
+  border-radius: 10rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  font-weight: 400;
+  width: 78%;
+  text-align: center;
+  margin: 72rpx auto;
+}
+
+._main .tip-body {
+  position: relative;
+  margin-top: 5rpx;
+}
+
+._main .tip-body .tip {
+  margin-top: 1rpx;
+  position: absolute;
+  right: 30rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 110rpx;
+  font-size: 26rpx;
+}
+
+._main .tip-body .success-tip {
+  color: #5BC29D;
+}

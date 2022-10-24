@@ -1,0 +1,16 @@
+<!-- 签名 -->
+<view class="_wrapper">
+  <view class="_handBtn">
+    <view class="_handBtnCont">
+      <view catchtap="retDraw" class="_but delBtn">
+        <em class="_icon iconfont icon-trash_fill"></em>
+        清空
+      </view>
+      <view catchtap="uploadCanvasImg" class="_but _saveBut">
+        <em class="_icon iconfont icon-baocun"></em>
+        保存
+      </view>
+    </view>
+  </view>
+  <canvas class="_handWriting" disable-scroll="true" bindtouchstart="uploadScaleStart" bindtouchmove="uploadScaleMove" bindtouchend="uploadScaleEnd" bindtap="mouseDown" id="{{canvasName}}" type="2d"></canvas>
+</view>

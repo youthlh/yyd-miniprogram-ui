@@ -1,0 +1,70 @@
+<!-- pages/main/main.wxml 我的 -->
+<wxs src="./../../utils/common.wxs" module="common" />
+<view class="_main">
+  <view class="_header">
+    <button class="_imgBut" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+      <image class="_image" src="{{avatarUrl}}"></image>
+    </button>
+    <view class="_information">
+      <view class="_name">
+        <view class="_nam">
+          {{findPersonalUserInfo.personalUserName?findPersonalUserInfo.personalUserName:"--"}}
+        </view>
+        <view class="_butt {{findPersonalUserInfo.identityVerifyStatus===1?'_butt1':''}}">
+          {{findPersonalUserInfo.identityVerifyStatus===1?'已实名': '未实名'}}
+        </view>
+        <view class="_butt {{findPersonalUserInfo.cardStatus===30?'_butt1':''}}">
+          {{findPersonalUserInfo.cardStatus===30?'已绑卡': '未绑卡'}}
+        </view>
+      </view>
+      <view class="_photo">{{common.phoneFormatting(findPersonalUserInfo.phone)}}</view>
+    </view>
+  </view>
+  <view class="_essentialMain">
+    <view class="_title">基本信息</view>
+    <view class="_kuang">
+      <view class="_sm" bindtap="authentication" data-tenantid="{{findPersonalUserInfo.tenantId}}" data-personalUserId="{{findPersonalUserInfo.personalUserId}}" data-identityVerifyStatus="{{findPersonalUserInfo.identityVerifyStatus}}" data-certificatePath="{{findPersonalUserInfo.certificatePath}}">
+        <image src="./../../assets/img/mainImgs/main0.png" mode="widthFix" lazy-load="true"></image>
+        <view class="_p">实名认证</view>
+      </view>
+      <view class="_bk" bindtap="toBindCard" data-personaluserid="{{findPersonalUserInfo.personalUserId}}" data-payaccount="{{findPersonalUserInfo.payAccount}}" data-phone="{{findPersonalUserInfo.phone}}" data-cardstatus="{{findPersonalUserInfo.cardStatus}}">
+        <image src="./../../assets/img/mainImgs/main1.png" mode="widthFix" lazy-load="true"></image>
+        <view class="_p">银行卡绑定</view>
+      </view>
+    </view>
+  </view>
+  <view class="_list">
+    <view wx:if="{{findPersonalUserInfo.tenantId!==0}}" bindtap="downNorm" class="_listChild" data-tenantid="{{findPersonalUserInfo.tenantId}}" data-personalUserId="{{findPersonalUserInfo.personalUserId}}" data-identityVerifyStatus="{{findPersonalUserInfo.identityVerifyStatus}}" data-certificatePath="{{findPersonalUserInfo.certificatePath}}">
+      <image class="_titleIcon" src="./../../assets/img/mainImgs/down-norm-icon.png" mode="widthFix" lazy-load="true"></image>
+      <view class="_listText">
+        合规培训证书下载
+        <em class="iconfont icon-right tip-body">
+          <text class="tip success-tip" wx:if="{{findPersonalUserInfo&&findPersonalUserInfo.certificatePath}}">已生成</text>
+          <text class="tip" wx:else>未生成</text>
+        </em>
+      </view>
+    </view>
+    <view bindtap="completedTask" class="_listChild" data-tenantid="{{findPersonalUserInfo.tenantId}}">
+      <image class="_titleIcon" src="./../../assets/img/mainImgs/main2.png" mode="widthFix" lazy-load="true"></image>
+      <view class="_listText">
+        已完成任务
+        <em class="iconfont icon-right"></em>
+      </view>
+    </view>
+    <view bindtap="reportMain" class="_listChild" data-tenantid="{{findPersonalUserInfo.tenantId}}">
+      <image class="_titleIcon" src="./../../assets/img/mainImgs/main3.png" mode="widthFix" lazy-load="true"></image>
+      <view class="_listText">
+        我的报告
+        <em class="iconfont icon-right"></em>
+      </view>
+    </view>
+    <view bindtap="billingInfo" class="_listChild" data-personaluserid="{{findPersonalUserInfo.personalUserId}}">
+      <image class="_titleIcon" src="./../../assets/img/mainImgs/main4.png" mode="widthFix" lazy-load="true"></image>
+      <view class="_listText">
+        结算信息
+        <em class="iconfont icon-right"></em>
+      </view>
+    </view>
+  </view>
+  <button class="_logOut" bindtap="logOut">退出登录</button>
+</view>

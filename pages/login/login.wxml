@@ -1,0 +1,25 @@
+<!-- pages/login/login.wxml 登录页面 -->
+<view class="login">
+  <view class="_login">
+    <image class="_img" src="/assets/img/logo.png" lazy-load="true" mode="heightFix"></image>
+  </view>
+  <view class="_title">欢迎登录{{welcomeTitle}}</view>
+  <view class="_tel">
+    <span>+86</span>
+    <em class="iconfont icon-right"></em>
+    <view class="ipt">
+      <input type="number" placeholder="请输入手机号" placeholder-class="place" model:value="{{phone}}" maxlength="11" bindinput="_bindinput" focus="{{phone.length < 11}}" />
+      <em class="iconfont icon-close" wx:if="{{phone.length}}" bindtap="delIpt"></em>
+    </view>
+  </view>
+  <view class="_tit">仅供要有道会员手机号登录</view>
+  <button class="{{phone.length == 11?'but btnAble':'but btnDisable'}}" bindtap="{{phone.length == 11?'getCode':''}}">
+    获取短信验证码
+  </button>
+  <view class="_wx">
+    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+      <p>使用第三方账号登录</p>
+      <em class="iconfont icon-wechat-fill"></em>
+    </button>
+  </view>
+</view>

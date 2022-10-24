@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "video-learning":"/components/mains/beforeRealName/videoLearning/index",
+    "norm-exam":"/components/mains/beforeRealName/normExam/normExam",
+    "down-norm":"/components/mains/beforeRealName/downNorm/downNorm",
+    "only-down":"/components/mains/beforeRealName/onlyDown/index"
+  }
+}
